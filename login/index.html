@@ -246,6 +246,13 @@ const errorMsg = document.getElementById('errorMsg');
 
 document.getElementById('loginBtn').onclick = async () => {
     errorMsg.style.display = "none";
+
+    const tosAccepted = document.getElementById('tosCheck').checked;
+    if (!tosAccepted) {
+        errorMsg.textContent = "You must accept the ToS to continue.";
+        errorMsg.style.display = "block";
+        return; 
+
     try {
         await signInWithEmailAndPassword(
             auth,
