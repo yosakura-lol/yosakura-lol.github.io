@@ -274,17 +274,20 @@ document.getElementById('signupBtn').onclick = async () => {
 document.getElementById('signupBtn').onclick = async () => {
     errorMsg.style.display = "none";
 
+    // Vérifie si le ToS est accepté
     const tosAccepted = document.getElementById('tosCheck').checked;
     if (!tosAccepted) {
         errorMsg.textContent = "You must accept the ToS to create an account.";
         errorMsg.style.display = "block";
-        return; // Arrête l'exécution si le ToS n'est pas accepté
+        return; // Stop l'exécution si le ToS n'est pas coché
     }
 
+    // Récupère les valeurs des champs
     const username = document.getElementById('username').value.trim();
     const email = document.getElementById('email').value;
     const pass = document.getElementById('pass').value;
 
+    // Vérifie que le nom d'utilisateur est rempli
     if (!username) {
         errorMsg.textContent = "Veuillez choisir un nom d'utilisateur.";
         errorMsg.style.display = "block";
@@ -292,9 +295,14 @@ document.getElementById('signupBtn').onclick = async () => {
     }
 
     try {
+        // Crée le compte Firebase
         const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+
+        // Met à jour le profil avec le nom d'utilisateur
         await updateProfile(userCredential.user, { displayName: username });
-        window.location.href = "/"; // Redirection après création du compte
+
+        // Redirige vers la page d'accueil
+        window.location.href = "/";
     } catch (e) {
         errorMsg.textContent = e.message;
         errorMsg.style.display = "block";
