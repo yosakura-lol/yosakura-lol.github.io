@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -248,10 +248,12 @@ document.getElementById('loginBtn').onclick = async () => {
     errorMsg.style.display = "none";
 
     const tosAccepted = document.getElementById('tosCheck').checked;
+
     if (!tosAccepted) {
         errorMsg.textContent = "You must accept the ToS to continue.";
         errorMsg.style.display = "block";
-        return; 
+        return; // Arrête l'exécution si le ToS n'est pas accepté
+    }
 
     try {
         await signInWithEmailAndPassword(
@@ -259,16 +261,13 @@ document.getElementById('loginBtn').onclick = async () => {
             document.getElementById('email').value,
             document.getElementById('pass').value
         );
-        window.location.href = "/";
+        window.location.href = "/"; // Redirection après connexion réussie
     } catch (e) {
         errorMsg.textContent = "Incorrect credentials.";
         errorMsg.style.display = "block";
     }
 };
 
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
 
 
 </script>
