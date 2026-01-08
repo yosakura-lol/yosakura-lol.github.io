@@ -270,29 +270,36 @@ const firebaseConfig = {
 const auth = getAuth(initializeApp(firebaseConfig));
 const errorMsg = document.getElementById('errorMsg');
 
-    document.getElementById('signupBtn').onclick = async () => {
-        errorMsg.style.display = "none";
+document.getElementById('signupBtn').onclick = async () => {
+document.getElementById('signupBtn').onclick = async () => {
+    errorMsg.style.display = "none";
 
-        const tosAccepted = document.getElementById('tosCheck').checked;
+    const tosAccepted = document.getElementById('tosCheck').checked;
+    if (!tosAccepted) {
+        errorMsg.textContent = "You must accept the ToS to create an account.";
+        errorMsg.style.display = "block";
+        return; // Arrête l'exécution si le ToS n'est pas accepté
+    }
 
-        if (!tosAccepted) {
-            errorMsg.textContent = "You must accept the ToS to continue.";
-            errorMsg.style.display = "block";
-            return; 
-        }
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('pass').value;
 
-        try {
-            await signUpWithEmailAndPassword(
-                auth,
-                document.getElementById('email').value,
-                document.getElementById('pass').value
-            );
-            window.location.href = "/"; 
-        } catch (e) {
-            errorMsg.textContent = "Incorrect credentials.";
-            errorMsg.style.display = "block";
-        }
-    };
+    if (!username) {
+        errorMsg.textContent = "Veuillez choisir un nom d'utilisateur.";
+        errorMsg.style.display = "block";
+        return;
+    }
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(userCredential.user, { displayName: username });
+        window.location.href = "/"; // Redirection après création du compte
+    } catch (e) {
+        errorMsg.textContent = e.message;
+        errorMsg.style.display = "block";
+    }
+};
 
 
 document.addEventListener('contextmenu', function(e) {
