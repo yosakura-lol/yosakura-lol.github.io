@@ -270,7 +270,7 @@ const firebaseConfig = {
 const auth = getAuth(initializeApp(firebaseConfig));
 const errorMsg = document.getElementById('errorMsg');
 
-    document.getElementById('s  ignupBtn').onclick = async () => {
+    document.getElementById('signupBtn').onclick = async () => {
         errorMsg.style.display = "none";
 
         const tosAccepted = document.getElementById('tosCheck').checked;
@@ -278,7 +278,7 @@ const errorMsg = document.getElementById('errorMsg');
         if (!tosAccepted) {
             errorMsg.textContent = "You must accept the ToS to continue.";
             errorMsg.style.display = "block";
-            return; // Arrête l'exécution si le ToS n'est pas accepté
+            return; 
         }
 
         try {
@@ -287,7 +287,7 @@ const errorMsg = document.getElementById('errorMsg');
                 document.getElementById('email').value,
                 document.getElementById('pass').value
             );
-            window.location.href = "/"; // Redirection après connexion réussie
+            window.location.href = "/"; 
         } catch (e) {
             errorMsg.textContent = "Incorrect credentials.";
             errorMsg.style.display = "block";
