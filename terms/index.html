@@ -1,260 +1,221 @@
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yosakura - Sign Up</title>
-    <link rel="icon" type="image/png" sizes="180x180" href="images/LogoP.png">
-    <style>
-        @keyframes slideInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yosakura - Terms of Service</title>
+<link rel="icon" type="image/png" sizes="180x180" href="images/LogoP.png">
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 200;
-            background-color: #0d0d0d; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+<style>
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px) translateX(-50%);}to{opacity:1;transform:translateY(0) translateX(-50%);}}
+@keyframes float{0%{transform:translateY(0) translateX(-50%);}50%{transform:translateY(6px) translateX(-50%);}100%{transform:translateY(0) translateX(-50%);}}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
 
-        .auth-card {
-            background: rgb(30, 30, 30);
-            backdrop-filter: blur(12px);
-            width: 380px; /* Largeur fixe pour PC */
-            padding: 130px 35px 30px 35px;
-            border-radius: 20px;
-            border: 1px solid #828282a3;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            color: white;
-            animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
-            box-sizing: border-box; /* Assure que le padding ne dépasse pas */
-        }
+html,body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #0d0d0d; /* Remplace cette couleur par celle que tu veux */
+    color: #ffffff;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox : cache la scrollbar */
+}::-webkit-scrollbar{width:0;height:0;}
+body{scrollbar-width:none;}
 
-        /* AJUSTEMENT POUR TÉLÉPHONE */
-        @media screen and (max-width: 480px) {
-            .auth-card {
-                width: 90%; /* Bords moins larges sur mobile */
-                padding: 110px 25px 25px 25px; /* Padding légèrement réduit */
-            }
-            .site-logo {
-                width: 240px; /* Logo un peu plus petit sur mobile */
-                top: -160px;
-            }
-        }
+.navbar{
+    margin-top:20px;
+    width:90%;
+    max-width:1200px;
+    background-color:rgba(15,8,12,0.457);
+    backdrop-filter:blur(10px);
+    padding:10px 30px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(31, 31, 31, 0.237);
+    animation:fadeInDown 1.2s ease-out forwards,float 4s ease-in-out infinite 1.2s;
+}
 
-        .reveal { opacity: 0; animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards; }
-        .del-1 { animation-delay: 0.1s; }
-        .del-2 { animation-delay: 0.3s; }
-        .del-3 { animation-delay: 0.5s; }
-        .del-4 { animation-delay: 0.7s; }
-        .del-5 { animation-delay: 0.9s; }
-        .del-6 { animation-delay: 1.1s; }
-        .del-7 { animation-delay: 1.3s; }
-        .del-8 { animation-delay: 1.5s; }
+.nav-group{display:flex;align-items:center;gap:45px;}
 
-        .site-logo {
-            position: absolute;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: auto;
-            filter: drop-shadow(0 0 10px #0d48006d)
-                    drop-shadow(0 0 20px #146f007a)
-                    drop-shadow(0 0 30px #13650072);
-        }
+.brand{display:flex;align-items:center;text-decoration:none;margin-left:-20px;}
+.brand-text{font-size:30px;letter-spacing:1px;margin-left:15px;margin-top:-15px;font-weight:600;color:white;transform:translateY(3px);
+text-shadow:0 2px 10px rgba(255,255,255,0.25),0 0 18px rgba(255,255,255,0.12);}
+.brand-text span{color:#21b200;text-shadow:0 0 6px rgba(33,178,0,0.9),0 0 14px rgba(33,178,0,0.6),0 0 22px rgba(33,178,0,0.35);}
 
-        .subtitle {
-            color: #ccc;
-            font-size: 13px;
-            margin-bottom: 45px;
-            line-height: 1.6;
-        }
+/* ===== EFFET HOVER TYPE DISCORD ===== */
+.nav-link{color:#bbb;text-decoration:none;font-size:15px;font-weight:600;padding:8px 18px;border-radius:13px;transition:all 0.3s ease;}
+.nav-link:hover{color:white;background:rgba(255,255,255,0.06);}
 
-        .input-group {
-            text-align: left;
-            margin-bottom: 24px;
-            position: relative;
-        }
+.signup-btn{
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+.signup-btn:hover{background-color: rgba(255,255,255,0.2);}
 
-        .input-label {
-            display: block;
-            font-size: 11px;
-            color: #aaa;
-            margin-bottom: 8px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.user-badge{
+    background: rgba(25,136,0,0.1);
+    border:1px solid #198800;
+    padding:8px 16px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.logout-link{background:none;border:none;color:#ff4d4d;cursor:pointer;font-size:11px;text-decoration:underline;margin-left:10px;}
 
-        .input-group img {
-            position: absolute;
-            left: 12px;
-            top: 40px; /* Ajusté pour l'alignement */
-            width: 18px;
-            height: 18px;
-            pointer-events: none;
-            filter: invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(100%);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px 15px 15px 40px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 12px;
-            color: white;
-            box-sizing: border-box;
-            outline: none;
-            transition: 0.3s;
-            font-size: 14px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background: rgba(85,122,46,0.05);
-            color: #274c00;
-            border: 1px solid rgba(85,122,46,0.3);
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background: rgba(85,122,46,0.1);
-            color: #7bab49;
-            transform: translateY(-2px);
-        }
-
-        .footer-link {
-            color: #bbb;
-            font-size: 12px;
-            margin-top: 30px;
-            display: block;
-            text-decoration: none;
-        }
-
-        .footer-link span { color: #25cd00b1; font-weight: bold; }
-        .footer-link span:hover { text-decoration: underline; }
-
-        .error-msg {
-            color: #ff4c4c;
-            font-size: 13px;
-            margin-top: 12px;
-            font-weight: 700;
-            display: none;
-            text-align: center;
-        }
-
-        .tos-group { margin-bottom: 5px; }
-        .tos-checkbox { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 12px; color: #aaa; text-align: left; }
-        .tos-checkbox input { display: none; }
-        .custom-checkbox { width: 16px; height: 16px; background: rgba(0,0,0,0.6); border: 1px solid #666; border-radius: 3px; position: relative; flex-shrink: 0; }
-        .tos-checkbox input:checked + .custom-checkbox { background: #21b200; border-color: #21b200; }
-        .tos-checkbox input:checked + .custom-checkbox::after { content: '✓'; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); }
-        .tos-text a { color: #25cd00b1; text-decoration: none; font-weight: 600; }
-
-        img { user-select: none; pointer-events: none; }
-    </style>
+.tos-wrapper{display:flex;justify-content:center;padding:220px 20px 120px;}
+.tos-card{width:100%;max-width:900px;background:rgb(30, 30, 30);backdrop-filter:blur(12px);border-radius:22px;padding:60px;animation:cardIn 1s cubic-bezier(0.2,0.9,0.2,1) forwards;border: 1px solid #828282a3;}
+.tos-card h1{font-size:36px;margin-bottom:10px;}
+.tos-card h2{margin-top:40px;font-size:22px;}
+.tos-card p{line-height:1.7;font-size:14px;margin-top:15px;}
+.tos-card ul{margin-top:15px;padding-left:20px;}
+.tos-card li{margin-bottom:10px;font-size:14px;}
+img{user-select:none;pointer-events:none;}
+</style>
 </head>
 <body>
-    <div class="auth-card">
-        <h2 class="title reveal del-1">
-            <img src="images/logo.png" alt="Yosakura Logo" class="site-logo">
-        </h2>
 
-        <p class="subtitle reveal del-2">creat an account with yosakura.lol.</p>
-
-        <div class="input-group reveal del-3">
-            <label class="input-label">Username</label>
-            <img src="images/username.png" alt="icon">
-            <input type="text" id="username" class="form-input" placeholder="Choose a username">
-        </div>
-
-        <div class="input-group reveal del-4">
-            <label class="input-label">E-Mail</label>
-            <img src="images/email.png" alt="icon">
-            <input type="email" id="email" class="form-input" placeholder="name@example.com">
-        </div>
-
-        <div class="input-group reveal del-5">
-            <label class="input-label">Password</label>
-            <img src="images/password.png" alt="icon">
-            <input type="password" id="pass" class="form-input" placeholder="Minimum 6 characters">
-        </div>
-
-        <div class="input-group tos-group reveal del-6">
-            <label class="tos-checkbox">
-                <input type="checkbox" id="tosCheck">
-                <span class="custom-checkbox"></span>
-                <span class="tos-text">You need to accept the <a href="/terms" target="_blank" rel="noopener">ToS</a></span>
-            </label>
-        </div>
-
-        <button class="submit-btn reveal del-7" id="signupBtn">Create Account</button>
-        <div id="errorMsg" class="error-msg"></div>
-
-        <a href="/login" class="footer-link reveal del-8">
-            Already have an account? <span>Login</span>
+<nav class="navbar">
+    <div class="nav-group">
+        <a href="/" class="brand">
+            <div class="brand-text">yoskr<span>.</span>lol</div>
         </a>
+        <a href="https://discord.gg/976HCmzmnN" class="nav-link" target="_blank" rel="noopener">Discord</a>
+        <a href="#" class="nav-link">Leaderboard</a>
+        <a href="#" class="nav-link">Team</a>
     </div>
+    <div class="nav-group" id="auth-section">
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/signup" class="signup-btn">Sign Up</a>
+    </div>
+</nav>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<div class="tos-wrapper">
+    <div class="tos-card">
+        <h1>Terms of Service – yosakura.lol</h1>
+        <p>By accessing or using yosakura.lol (the “Service”), you acknowledge that you have read, understood, and agree to be bound by these Terms of Service (“Terms”) and all applicable laws and regulations. Your continued use constitutes acceptance of any future modifications or updates to these Terms.</p>
+        <p>All content, materials, and intellectual property made available through yosakura.lol are protected by copyright and other applicable intellectual property laws. Unauthorized use, reproduction, or distribution may result in account suspension or termination.</p>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
-            authDomain: "fir-deffe.firebaseapp.com",
-            projectId: "fir-deffe",
-            storageBucket: "fir-deffe.firebasestorage.app",
-            messagingSenderId: "758364730866",
-            appId: "1:758364730866:web:feae96430aa5b8512da76b"
-        };
+        <h2>Changes to Terms</h2>
+        <p>yosakura.lol may update these Terms at any time. Changes take effect when posted to the Service or otherwise communicated to you. By continuing to access or use the Service after a change takes effect, you accept the updated Terms.</p>
+        <p>If a change materially impacts a paid offering, reasonable advance notice will be provided. If you do not agree to the updated Terms, you must stop using the Service and cancel any paid plan before renewal.</p>
 
-        const auth = getAuth(initializeApp(firebaseConfig));
-        const errorMsg = document.getElementById('errorMsg');
+        <h2>Use of the Service</h2>
+        <p>You are granted access to yosakura.lol strictly for lawful use and in accordance with these Terms. Any use that could damage, disable, overburden, or impair the Service or interfere with another user's use is prohibited.</p>
+        <p>Usernames must not be unlawful, misleading, infringing, or offensive. We reserve the right to reclaim, remove, or suspend usernames or accounts that violate these rules or create confusion with official yosakura.lol properties.</p>
+        <p>You are responsible for your conduct and any content you post. You agree not to:</p>
+        <ul>
+            <li>Bypass or interfere with security or access controls</li>
+            <li>Impersonate any person, entity, or brand</li>
+            <li>Access another user’s account or private data without authorization</li>
+            <li>Use bots, scripts, or automated tools without permission</li>
+            <li>Upload malware or harmful content</li>
+            <li>Post illegal, sexually explicit, exploitative, or violent content</li>
+        </ul>
+        <p>We may suspend or terminate accounts at our discretion, with or without notice.</p>
 
-        document.getElementById('signupBtn').onclick = async () => {
-            errorMsg.style.display = "none";
-            const tosAccepted = document.getElementById('tosCheck').checked;
-            if(!tosAccepted) {
-                errorMsg.textContent = "You must accept the ToS to create an account.";
-                errorMsg.style.display = "block";
-                return;
-            }
+        <h2>Image Hosting</h2>
+        <p>Image hosting is for personal and social use only. It must not be used as a CDN, backend, or for bulk or automated usage. Abuse may result in limits, suspension, or termination.</p>
 
-            try {
-                const username = document.getElementById('username').value.trim();
-                const email = document.getElementById('email').value;
-                const pass = document.getElementById('pass').value;
-                if(!username) {
-                    errorMsg.textContent = "Veuillez choisir un nom d'utilisateur.";
-                    errorMsg.style.display = "block";
-                    return;
-                }
-                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-                await updateProfile(userCredential.user, { displayName: username });
-                window.location.href = "/";
-            } catch(e) {
-                errorMsg.textContent = e.message;
-                errorMsg.style.display = "block";
-            }
-        };
-        document.addEventListener('contextmenu', e => e.preventDefault());
-    </script>
+        <h2>Security</h2>
+        <p>We take reasonable measures to protect the Service but cannot guarantee absolute security. You are responsible for protecting your account credentials and must report suspicious activity to support@yosakura.lol.</p>
+
+        <h2>User-Posted Content and License</h2>
+        <p>You retain ownership of your content but grant yosakura.lol a non-exclusive, worldwide, royalty-free license to host, store, modify, and display it as necessary to operate the Service.</p>
+        <p>This license ends when content is deleted, except where required for legal, security, or compliance purposes.</p>
+        <p>You agree to indemnify yosakura.lol against claims arising from your content or violation of these Terms.</p>
+
+        <h2>Prohibited Content and Activities</h2>
+        <p>Prohibited actions include, but are not limited to:</p>
+        <ul>
+            <li>Illegal or unlawful content</li>
+            <li>IP, privacy, or publicity rights violations</li>
+            <li>Pornographic, hateful, or abusive material</li>
+            <li>Scams, phishing, impersonation, or spam</li>
+            <li>Malware, exploits, or service disruption</li>
+            <li>Promotion of violence, terrorism, or self-harm</li>
+        </ul>
+
+        <h2>Third-Party Services</h2>
+        <p>Linking third-party services is optional and governed by their own terms. yosakura.lol is not responsible for third-party content or actions.</p>
+
+        <h2>Account Limitations</h2>
+        <p>Each individual may create only one account. Selling, sharing, or reselling access is prohibited. Suspicious or abusive behavior may result in action across related accounts.</p>
+
+        <h2>Software</h2>
+        <p>Any official yosakura.lol software is licensed, not sold. Modification, reverse engineering, or redistribution is prohibited. Software is provided “as is” without warranties.</p>
+
+        <h2>Payments, Subscriptions, and Refunds</h2>
+        <p>Payments are generally non-refundable. Subscriptions renew automatically unless canceled. We may suspend access for failed payments or pricing abuse.</p>
+
+        <h2>Privacy</h2>
+        <p>Use of the Service is governed by our Privacy Policy. Upon verified account deletion, personal data is permanently deleted except where retention is legally required.</p>
+
+        <h2>Intellectual Property</h2>
+        <p>All Service content (excluding user content) remains the property of yosakura.lol. No rights are granted beyond what is necessary to use the Service.</p>
+
+        <h2>Limitation of Liability</h2>
+        <p>To the maximum extent permitted by law, yosakura.lol is not liable for indirect, incidental, or consequential damages. Total liability will not exceed the greater of the amount paid in the last 12 months or 100€.</p>
+
+        <h2>Disclaimer of Warranties</h2>
+        <p>The Service is provided “as is” and “as available,” without warranties of any kind. Use is at your own risk.</p>
+
+        <h2>Termination</h2>
+        <p>We may suspend or terminate access at any time for violations or legal compliance. Provisions that should survive termination will remain in effect.</p>
+    </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
+    authDomain: "fir-deffe.firebaseapp.com",
+    projectId: "fir-deffe",
+    storageBucket: "fir-deffe.firebasestorage.app",
+    messagingSenderId: "758364730866",
+    appId: "1:758364730866:web:feae96430aa5b8512da76b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.handleLogout = () => signOut(auth);
+
+onAuthStateChanged(auth, (user) => {
+    const authSection = document.getElementById('auth-section');
+    if (user) {
+        const name = user.displayName || user.email.split('@')[0];
+        authSection.innerHTML = `
+            <div class="user-badge">
+                <span>${name}</span>
+                <button onclick="handleLogout()" class="logout-link">Logout</button>
+            </div>`;
+    } else {
+        authSection.innerHTML = `
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/signup" class="signup-btn">Sign Up</a>`;
+    }
+});
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+</script>
+
 </body>
 </html>
