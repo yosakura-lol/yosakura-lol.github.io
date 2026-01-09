@@ -28,6 +28,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes slideFromRight {
+            from { opacity: 0; transform: translateX(200px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -106,32 +111,35 @@
 
         /* MOBILE MENU */
         .menu-btn { display: none; cursor: pointer; background: none; border: none; padding: 10px; }
-.menu-btn span { display: block; width: 25px; height: 2px; background-color: white; margin: 6px 0; transition: 0.4s; }
-.mobile-only { display: none; }
+        .menu-btn span { display: block; width: 25px; height: 2px; background-color: white; margin: 6px 0; transition: 0.4s; }
+        .mobile-only { display: none; }
 
-        /* Remplace la section @media existante par celle-ci */
-@media screen and (max-width: 768px) {
-    .navbar { max-height: 62.5px; }
-    .navbar.open { max-height: 400px; }
-    .menu-btn { display: block; }
-    #nav-links-container {
-        width: 100%; flex-direction: column; margin: 0; padding: 15px 0; gap: 12px; order: 3; text-align: center; opacity: 0; transition: opacity 0.3s ease;
-    }
-    .navbar.open #nav-links-container { opacity: 1; }
-    #auth-section { display: none; }
-    .mobile-only {
-        display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;
-    }
-}
-        
+        @media screen and (max-width: 768px) {
+            .navbar { max-height: 62.5px; }
+            .navbar.open { max-height: 400px; }
+            .menu-btn { display: block; }
+            #nav-links-container {
+                width: 100%; flex-direction: column; margin: 0; padding: 15px 0; gap: 12px; order: 3; text-align: center; opacity: 0; transition: opacity 0.3s ease;
+            }
+            .navbar.open #nav-links-container { opacity: 1; }
+            #auth-section { display: none; }
+            .mobile-only {
+                display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;
+            }
+            .main-box-wrapper { display: none !important; }
+            .hero-container { justify-content: center; padding-top: 150px; }
+        }
 
-        /* HERO SECTION */
+        /* HERO SECTION - MODIFIÉ POUR LE CENTRAGE */
         .hero-container {
             height: 100vh;
             display: flex;
-            align-items: flex-start; 
-            padding-left: 10%;
-            padding-top: 280px; 
+            align-items: center; /* Centre verticalement */
+            justify-content: center; /* CENTRE TOUT LE BLOC HORIZONTALEMENT */
+            gap: 100px; /* Espace entre le texte et le carré */
+            padding-left: 5%;
+            padding-right: 5%;
+            box-sizing: border-box;
         }
 
         .hero-content-titles { animation: zoomIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -182,6 +190,63 @@
             .action-wrapper { flex-direction: column; width: 100%; max-width: 275px; }
             .claim-btn { padding: 14px; justify-content: center; }
         }
+
+        /* --- STYLE CARRÉ --- */
+        .main-box-wrapper {
+            perspective: 1000px;
+            animation: slideFromRight 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
+            opacity: 0;
+        }
+
+        .main-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px; 
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 375px;
+            height: 375px;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-section { text-align: center; color: white; margin-bottom: 5px; }
+        .avatar-top { width: 85px; height: auto; margin-bottom: 5px; }
+        .username { font-size: 1.6rem; font-weight: bold; }
+        #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
+
+        .roblox-card {
+            width: 310px; height: 80px; 
+            display: flex; align-items: center; justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(255,255,255,0.2);
+            border-radius: 12px; padding: 10px; color: white; position: relative;
+        }
+
+        .roblox-card .top-right { position: absolute; top: 2px; right: 12px; display: flex; align-items: center; }
+        .roblox-card .logo-top { width: 28px; height: 28px; }
+        .roblox-card .avatar-img { width: 75px; height: 75px; object-fit: cover; margin-right: 15px; }
+        .roblox-card .info { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .roblox-card .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+        .roblox-card .stats { display: flex; gap: 8px; margin-bottom: 5px; }
+        .roblox-card .stat-item { display: flex; align-items: center; font-size: 9px; color: #ccc; }
+        .roblox-card .stat-icon { width: 12px; height: 12px; margin-right: 3px; filter: grayscale(100%) brightness(0.9); }
+        .roblox-card .btn { background: #157437; color: white; border: none; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; cursor: pointer; }
+
+        .music-container { width: 310px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 5px; }
+        .music-cover { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
+        .music-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .music-title { font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .music-player-row { display: flex; align-items: center; gap: 8px; }
+        .music-time-box { flex: 1; display: flex; align-items: center; gap: 6px; font-size: 8px; }
+        .music-line { flex: 1; height: 2px; background: rgba(255, 255, 255, 0.2); border-radius: 1px; overflow: hidden; }
+        .music-progress { width: 0%; height: 100%; background: #ffffff; }
+        .music-controls { display: flex; align-items: center; gap: 6px; }
+        .music-controls img { width: 16px; height: 16px; filter: brightness(0) invert(1); cursor: pointer; }
     </style>
 </head>
 
@@ -223,7 +288,58 @@
             <button class="claim-btn">Claim Username</button>
         </div>
     </div>
+
+    <div class="main-box-wrapper">
+        <div class="main-box" id="mainBox">
+            <div class="header-section">
+                <img class="avatar-top" src="https://i.postimg.cc/HLchMMdR/b9e8db33168a26c9ca697a05ddc80937-removebg-preview.png">
+                <div class="username">yosakura.lol</div>
+                <div id="subtitle">15yo ,web-dev</div>
+            </div>
+
+            <div class="roblox-card">
+                <div class="top-right">
+                    <img src="https://i.postimg.cc/G20ScJ5H/fe033798649b136ee17373d4881d9578-removebg-preview.png" class="logo-top">
+                </div>
+                <img id="roblox-avatar" class="avatar-img" src="https://static.rbxcdn.com/pngs/avatar-placeholder.png">
+                <div class="info">
+                    <div class="name" id="roblox-username">Chargement...</div>
+                    <div class="stats">
+                        <span class="stat-item">
+                            <img src="https://i.postimg.cc/Vsg4T8mb/1b0626128696bd51131b93a3f404b2a3-removebg-preview.png" class="stat-icon">
+                            <span id="roblox-friends">0 Friends</span>
+                        </span>
+                        <span class="stat-item">
+                            <img src="https://i.postimg.cc/pLYm00JM/image-removebg-preview.png" class="stat-icon">
+                            <span id="roblox-followers">0 Followers</span>
+                        </span>
+                    </div>
+                    <button class="btn" id="roblox-profileBtn">View Profile</button>
+                </div>
+            </div>
+
+            <div class="music-container">
+                <img class="music-cover" id="cover" src="" alt="Cover">
+                <div class="music-content">
+                    <div class="music-title" id="music-title">Chargement...</div>
+                    <div class="music-player-row">
+                        <div class="music-time-box">
+                            <span id="current-time">0:00</span>
+                            <div class="music-line"><div class="music-progress" id="progress"></div></div>
+                        </div>
+                        <div class="music-controls">
+                            <img id="prev" src="https://i.postimg.cc/c4zmgfJj/arriere.png">
+                            <img id="play-pause" src="https://i.postimg.cc/RhVRfRKr/pause.png">
+                            <img id="next" src="https://i.postimg.cc/KYMsvJrJ/suivant.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+<audio id="audio" loop></audio>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -253,27 +369,91 @@ onAuthStateChanged(auth, (user) => {
         </div>` : 
         `<a href="/login" class="nav-link">Login</a><a href="/signup" class="signup-btn">Sign Up</a>`;
 
-    authSection.innerHTML = content;
-    mobileAuth.innerHTML = content;
+    if(authSection) authSection.innerHTML = content;
+    if(mobileAuth) mobileAuth.innerHTML = content;
 });
 
 const menuBtn = document.getElementById('menu-btn');
 const navbar = document.getElementById('navbar');
 
-menuBtn.addEventListener('click', () => {
-    navbar.classList.toggle('open');
-    const spans = menuBtn.querySelectorAll('span');
-    if(navbar.classList.contains('open')) {
-        spans[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
-        spans[1].style.opacity = "0";
-        spans[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
-    } else {
-        spans[0].style.transform = "none";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "none";
-    }
-});
+if(menuBtn) {
+    menuBtn.addEventListener('click', () => {
+        navbar.classList.toggle('open');
+        const spans = menuBtn.querySelectorAll('span');
+        if(navbar.classList.contains('open')) {
+            spans[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
+            spans[1].style.opacity = "0";
+            spans[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
+        } else {
+            spans[0].style.transform = "none";
+            spans[1].style.opacity = "1";
+            spans[2].style.transform = "none";
+        }
+    });
+}
 
+const mainBox = document.getElementById("mainBox");
+if(mainBox) {
+    mainBox.addEventListener("mousemove", (e) => {
+        const rect = mainBox.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        mainBox.style.transform = `rotateX(${(y - 0.5) * 20}deg) rotateY(${(x - 0.5) * -20}deg)`;
+    });
+    mainBox.addEventListener("mouseleave", () => mainBox.style.transform = "rotateX(0deg) rotateY(0deg)");
+}
+
+const audio = document.getElementById("audio");
+const playPauseBtn = document.getElementById("play-pause");
+const progress = document.getElementById("progress");
+const tracks = [
+    {src:"https://files.catbox.moe/ieb3np.mp3", title:"Dancing with your eyes closed", cover:"https://i.postimg.cc/tJYynTvQ/1d50d94246ed3f370baa1759b6b876c4.jpg"},
+    {src:"https://files.catbox.moe/bf0da2.mp3", title:"Century", cover:"https://i.postimg.cc/52v4mXxZ/esdeekid.jpg"}
+];
+let currentTrack = 0;
+
+function loadTrack(index, play = false) {
+    currentTrack = (index + tracks.length) % tracks.length;
+    audio.src = tracks[currentTrack].src;
+    document.getElementById("cover").src = tracks[currentTrack].cover;
+    document.getElementById("music-title").textContent = tracks[currentTrack].title;
+    if(play) audio.play();
+}
+
+if(playPauseBtn) {
+    playPauseBtn.onclick = () => audio.paused ? audio.play() : audio.pause();
+    document.getElementById("next").onclick = () => loadTrack(currentTrack + 1, true);
+    document.getElementById("prev").onclick = () => loadTrack(currentTrack - 1, true);
+}
+
+audio.ontimeupdate = () => {
+    progress.style.width = (audio.currentTime / audio.duration * 100) + "%";
+    const m = Math.floor(audio.currentTime / 60);
+    const s = Math.floor(audio.currentTime % 60).toString().padStart(2, "0");
+    document.getElementById("current-time").textContent = `${m}:${s}`;
+};
+
+async function loadRoblox() {
+    try {
+        const id = 1; 
+        const user = await fetch(`https://users.roproxy.com/v1/users/${id}`).then(r => r.json());
+        document.getElementById('roblox-username').textContent = user.displayName;
+        const thumb = await fetch(`https://thumbnails.roproxy.com/v1/users/avatar?userIds=${id}&size=150x150&format=Png`).then(r => r.json());
+        document.getElementById('roblox-avatar').src = thumb.data[0].imageUrl;
+        const friends = await fetch(`https://friends.roproxy.com/v1/users/${id}/friends/count`).then(r => r.json());
+        document.getElementById('roblox-friends').textContent = `${friends.count || 0} Friends`;
+        const followers = await fetch(`https://friends.roproxy.com/v1/users/${id}/followers/count`).then(r => r.json());
+        document.getElementById('roblox-followers').textContent = `${followers.count || 0} Followers`;
+        document.getElementById('roblox-profileBtn').onclick = () => {
+            window.open(`https://www.roblox.com/users/${id}/profile`, '_blank');
+        };
+    } catch (e) {
+        console.error("Erreur Roblox:", e);
+    }
+}
+
+loadRoblox();
+loadTrack(0);
 document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
