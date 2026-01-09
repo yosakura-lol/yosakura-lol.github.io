@@ -209,7 +209,7 @@
         .main-box {
             background: rgba(0, 0, 0, 0.256);
             border: 2px solid rgba(10, 125, 39, 0.313);
-            border-radius: 10px; 
+            border-radius: 18px; 
             padding: 25px;
             backdrop-filter: blur(10px);
             display: flex;
@@ -229,7 +229,7 @@
         #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
 
         .roblox-card {
-            width: 250px; height: 50px; 
+            width: 240px; height: 55px; 
             display: flex; align-items: center; justify-content: flex-start;
             background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(255,255,255,0.2);
             border-radius: 18px; padding: 10px; color: white; position: relative;
@@ -237,7 +237,7 @@
 
         .roblox-card .top-right { position: absolute; top: 2px; right: 12px; display: flex; align-items: center; }
         .roblox-card .logo-top { width: 28px; height: 28px; }
-        .roblox-card .avatar-img { width: 75px; height: 75px; object-fit: cover; margin-right: 15px; }
+        .roblox-card .avatar-img { width: 75px; height: 75px; object-fit: cover; margin-right: -5px; }
         .roblox-card .info { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
         .roblox-card .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
         .roblox-card .stats { display: flex; gap: 8px; margin-bottom: 5px; }
@@ -245,7 +245,7 @@
         .roblox-card .stat-icon { width: 12px; height: 12px; margin-right: 3px; filter: grayscale(100%) brightness(0.9); }
         .roblox-card .btn { background: #157437; color: white; border: none; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; cursor: pointer; }
 
-        .music-container { width: 310px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 5px; }
+        .music-container { width: 360px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 50px; }
         .music-cover { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
         .music-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .music-title { font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -337,7 +337,12 @@
                         </div>
                         <div class="music-controls">
                             <img id="prev" src="https://i.postimg.cc/c4zmgfJj/arriere.png">
-                            <img id="play-pause" src="https://i.postimg.cc/RhVRfRKr/pause.png">
+<img
+  id="play-pause"
+  src="https://i.postimg.cc/Gh1r0gG3/reprendre.png"
+  data-play="https://i.postimg.cc/RhVRfRKr/pause.png"
+  data-pause="https://i.postimg.cc/Gh1r0gG3/reprendre.png"
+>
                             <img id="next" src="https://i.postimg.cc/KYMsvJrJ/suivant.png">
                         </div>
                     </div>
@@ -428,11 +433,32 @@ function loadTrack(index, play = false) {
     if(play) audio.play();
 }
 
-if(playPauseBtn) {
-    playPauseBtn.onclick = () => audio.paused ? audio.play() : audio.pause();
-    document.getElementById("next").onclick = () => loadTrack(currentTrack + 1, true);
-    document.getElementById("prev").onclick = () => loadTrack(currentTrack - 1, true);
+if (playPauseBtn) {
+
+    function syncButton() {
+        playPauseBtn.src = audio.paused
+            ? playPauseBtn.dataset.play
+            : playPauseBtn.dataset.pause;
+    }
+
+    playPauseBtn.onclick = () => {
+        audio.paused ? audio.play() : audio.pause();
+    };
+
+    document.getElementById("next").onclick = () => {
+        loadTrack(currentTrack + 1, true);
+    };
+
+    document.getElementById("prev").onclick = () => {
+        loadTrack(currentTrack - 1, true);
+    };
+
+    audio.onplay = syncButton;
+    audio.onpause = syncButton;
+
+    syncButton(); // 🔥 synchronisation initiale
 }
+
 
 audio.ontimeupdate = () => {
     progress.style.width = (audio.currentTime / audio.duration * 100) + "%";
