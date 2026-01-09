@@ -34,25 +34,21 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/background.png');
             background-color: black;
-            background-attachment: fixed; /* Garde le fond fixe */
+            background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             color: white;
             overflow-x: hidden;
-            
-            /* Masquer la barre de défilement pour Firefox */
             scrollbar-width: none; 
-            /* Masquer la barre de défilement pour Internet Explorer et Edge */
             -ms-overflow-style: none; 
         }
 
-        /* Masquer la barre de défilement pour Chrome, Safari et Opera */
         body::-webkit-scrollbar {
             display: none;
         }
 
-        /* NAVBAR - CLONÉE DU DEUXIÈME CODE */
+        /* NAVBAR STYLE */
         .navbar {
             margin-top: 20px;
             width: 85%; 
@@ -91,7 +87,6 @@
         }
 
         .nav-group { display: flex; align-items: center; gap: 20px; }
-
         #nav-links-container { margin-left: 40px; margin-right: auto; }
 
         .nav-link { color: #bbb; text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 18px; border-radius: 13px; transition: all 0.3s ease; }
@@ -114,52 +109,21 @@
         .menu-btn span { display: block; width: 25px; height: 2px; background-color: white; margin: 6px 0; transition: 0.4s; }
         .mobile-only { display: none; }
 
-        @media screen and (max-width: 768px) {
-    .navbar { 
-        height: 70px; /* Hauteur fixe quand fermé */
-        overflow: hidden; 
-        transition: all 0.4s ease;
-        align-items: flex-start; /* Aligne le logo et le burger en haut */
-        padding-top: 15px;
-    }
-    
-    .navbar.open { 
-        height: auto; 
-        max-height: 500px; 
-        padding-bottom: 20px;
-    }
-
-    .menu-btn { display: block; order: 2; }
-    .brand { order: 1; }
-
+        /* Remplace la section @media existante par celle-ci */
+@media screen and (max-width: 768px) {
+    .navbar { max-height: 70px; }
+    .navbar.open { max-height: 400px; }
+    .menu-btn { display: block; }
     #nav-links-container {
-        display: none; /* Cache par défaut */
-        width: 100%; 
-        flex-direction: column; 
-        margin: 0; 
-        padding: 20px 0; 
-        gap: 15px; 
-        order: 3; 
-        text-align: center;
+        width: 100%; flex-direction: column; margin: 0; padding: 15px 0; gap: 12px; order: 3; text-align: center; opacity: 0; transition: opacity 0.3s ease;
     }
-
-    .navbar.open #nav-links-container { 
-        display: flex; /* Affiche quand ouvert */
-        opacity: 1; 
-    }
-
-    #auth-section { display: none; } /* Cache la version desktop */
-
+    .navbar.open #nav-links-container { opacity: 1; }
+    #auth-section { display: none; }
     .mobile-only {
-        display: flex !important; /* Force l'affichage dans le menu mobile */
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-top: 15px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        padding-top: 15px;
+        display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;
     }
 }
+        
 
         /* HERO SECTION */
         .hero-container {
