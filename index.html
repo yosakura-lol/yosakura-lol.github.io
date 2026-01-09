@@ -130,13 +130,13 @@
             .hero-container { justify-content: center; padding-top: 150px; }
         }
 
-        /* HERO SECTION - MODIFIÉ POUR LE CENTRAGE */
+        /* HERO SECTION */
         .hero-container {
             height: 100vh;
             display: flex;
-            align-items: center; /* Centre verticalement */
-            justify-content: center; /* CENTRE TOUT LE BLOC HORIZONTALEMENT */
-            gap: 100px; /* Espace entre le texte et le carré */
+            align-items: center; 
+            justify-content: center; 
+            gap: 100px; 
             padding-left: 5%;
             padding-right: 5%;
             box-sizing: border-box;
@@ -146,7 +146,15 @@
         .hero-title { font-size: 55px; font-weight: 800; margin: 0; }
         .hero-subtitle { font-size: 45px; font-weight: 800; margin: 0; }
         .highlight { color: #198800; text-shadow: 0 0 20px rgba(0, 138, 9, 0.4); }
-        .hero-description { font-size: 16px; color: #bbb; margin-top: 15px; max-width: 380px; line-height: 1.5; opacity: 0; animation: slideInTop 0.8s ease-out forwards 0.5s; }
+        .hero-description { 
+            font-size: 20px; /* TAILLE AUGMENTÉE ICI */
+            color: #bbb; 
+            margin-top: 15px; 
+            max-width: 420px; /* Légèrement élargi pour accommoder la police */
+            line-height: 1.5; 
+            opacity: 0; 
+            animation: slideInTop 0.8s ease-out forwards 0.5s; 
+        }
 
         .action-wrapper {
             display: flex;
