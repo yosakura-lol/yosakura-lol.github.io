@@ -33,12 +33,22 @@
             padding: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/background.png');
-            background-attachment: fixed;
+            background-attachment: fixed; /* Garde le fond fixe */
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             color: white;
             overflow-x: hidden;
+            
+            /* Masquer la barre de défilement pour Firefox */
+            scrollbar-width: none; 
+            /* Masquer la barre de défilement pour Internet Explorer et Edge */
+            -ms-overflow-style: none; 
+        }
+
+        /* Masquer la barre de défilement pour Chrome, Safari et Opera */
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         /* NAVBAR - CLONÉE DU DEUXIÈME CODE */
