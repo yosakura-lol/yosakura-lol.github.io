@@ -1,581 +1,257 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yosakura.lol</title>
+    <title>Yosakura - Sign Up</title>
     <link rel="icon" type="image/png" sizes="180x180" href="images/LogoP.png">
-
     <style>
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px) translateX(-50%); }
-            to { opacity: 1; transform: translateY(0) translateX(-50%); }
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) translateX(-50%); }
-            50% { transform: translateY(6px) translateX(-50%); }
-            100% { transform: translateY(0) translateX(-50%); }
-        }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes slideInTop {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideFromRight {
-            from { opacity: 0; transform: translateX(200px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/background.png');
-            background-color: #0d0d0d;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: white;
-            overflow-x: hidden;
-            scrollbar-width: none; 
-            -ms-overflow-style: none; 
-        }
-
-        body::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* NAVBAR STYLE */
-        .navbar {
-            margin-top: 20px;
-            width: 85%; 
-            max-width: 1200px;
-            background-color: rgba(15, 8, 12, 0.457);
-            backdrop-filter: blur(10px);
-            padding: 8px 25px; 
-            border-radius: 16px; 
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 200;
+            background-color: #0d0d0d; 
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            position: fixed;
+            overflow: hidden;
+        }
+
+        .auth-card {
+            background: rgb(30, 30, 30);
+            backdrop-filter: blur(12px);
+            width: 380px; /* Largeur fixe pour PC */
+            padding: 130px 35px 30px 35px;
+            border-radius: 20px;
+            border: 1px solid #828282a3;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+            animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
+            box-sizing: border-box; /* Assure que le padding ne dépasse pas */
+        }
+
+        /* AJUSTEMENT POUR TÉLÉPHONE */
+        @media screen and (max-width: 480px) {
+            .auth-card {
+                width: 90%; /* Bords moins larges sur mobile */
+                padding: 110px 25px 25px 25px; /* Padding légèrement réduit */
+            }
+            .site-logo {
+                width: 240px; /* Logo un peu plus petit sur mobile */
+                top: -160px;
+            }
+        }
+
+        .reveal { opacity: 0; animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards; }
+        .del-1 { animation-delay: 0.1s; }
+        .del-2 { animation-delay: 0.3s; }
+        .del-3 { animation-delay: 0.5s; }
+        .del-4 { animation-delay: 0.7s; }
+        .del-5 { animation-delay: 0.9s; }
+        .del-6 { animation-delay: 1.1s; }
+        .del-7 { animation-delay: 1.3s; }
+        .del-8 { animation-delay: 1.5s; }
+
+        .site-logo {
+            position: absolute;
+            top: -150px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1000;
-            animation: fadeInDown 1.2s ease-out forwards, float 4s ease-in-out infinite 1.2s;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            box-sizing: border-box;
-            flex-wrap: wrap;
+            width: 150px;
+            height: auto;
         }
 
-        .brand { display: flex; align-items: center; text-decoration: none; }
-        .brand-text {
-            font-size: 28px;
+        .subtitle {
+            color: #ccc;
+            font-size: 13px;
+            margin-bottom: 45px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 11px;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: -15px;
-            font-weight: 600;
-            color: white;
-            transform: translateY(3px);
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.25), 0 0 18px rgba(255, 255, 255, 0.12);
-        }
-        .brand-text span {
-            color: #ff69b4;
-            text-shadow: 0 0 6px rgba(255, 68, 249, 0.9), 0 0 14px rgba(33, 178, 0, 0.6), 0 0 22px rgba(33, 178, 0, 0.35);
         }
 
-        .nav-group { display: flex; align-items: center; gap: 20px; }
-        #nav-links-container { margin-left: 40px; margin-right: auto; }
+        .input-group img {
+            position: absolute;
+            left: 12px;
+            top: 40px; /* Ajusté pour l'alignement */
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+            filter: invert(70%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(100%);
+        }
 
-        .nav-link { color: #bbb; text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 18px; border-radius: 13px; transition: all 0.3s ease; }
-        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.06); }
-
-        .signup-btn {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 10px 24px;
+        .form-input {
+            width: 100%;
+            padding: 15px 15px 15px 40px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.03);
             border-radius: 12px;
-            text-decoration: none;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,105,180,0.05);            
+            color: #ff69b4;
+            border: 1px solid rgba(255,105,180,0.3);
+            border-radius: 12px;
             font-size: 14px;
             font-weight: bold;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        /* MOBILE MENU */
-        .menu-btn { display: none; cursor: pointer; background: none; border: none; padding: 10px; }
-        .menu-btn span { display: block; width: 25px; height: 2px; background-color: white; margin: 6px 0; transition: 0.4s; }
-        .mobile-only { display: none; }
-
-        @media screen and (max-width: 768px) {
-            .navbar { max-height: 62.5px; }
-            .navbar.open { max-height: 400px; }
-            .menu-btn { display: block; }
-            #nav-links-container {
-                width: 100%; flex-direction: column; margin: 0; padding: 15px 0; gap: 12px; order: 3; text-align: center; opacity: 0; transition: opacity 0.3s ease;
-            }
-            .navbar.open #nav-links-container { opacity: 1; }
-            #auth-section { display: none; }
-            .mobile-only {
-                display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;
-            }
-            .main-box-wrapper { display: none !important; }
-            .hero-container { justify-content: center; padding-top: 150px; }
-        }
-
-        /* HERO SECTION */
-        .hero-container {
-            height: 100vh;
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            gap: 100px; 
-            padding-left: 5%;
-            padding-right: 5%;
-            box-sizing: border-box;
-        }
-
-        .hero-content-titles { animation: zoomIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .hero-title { font-size: 55px; font-weight: 800; margin: 0; }
-        .hero-subtitle { font-size: 45px; font-weight: 800; margin: 0; }
-        .highlight { color: #ff69b4; text-shadow: 0 0 20px rgba(255, 105, 180, 0.4); }
-        .hero-description { 
-            font-size: 20px; /* TAILLE AUGMENTÉE ICI */
-            color: #bbb; 
-            margin-top: 15px; 
-            max-width: 420px; /* Légèrement élargi pour accommoder la police */
-            line-height: 1.5; 
-            opacity: 0; 
-            animation: slideInTop 0.8s ease-out forwards 0.5s; 
-        }
-
-        .action-wrapper {
-            display: flex;
-            align-items: stretch; 
-            gap: 12px;
-            margin-top: 30px;
-            opacity: 0;
-            animation: slideInTop 0.8s ease-out forwards 0.9s;
-        }
-
-        .claim-container {
-            display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0 12px;
-            border-radius: 10px;
-            width: 250px;
-        }
-
-        .claim-prefix { color: #666; font-weight: 600; font-size: 15px; }
-        .claim-input { background: transparent; border: none; color: white; padding: 14px 8px; font-size: 15px; outline: none; flex-grow: 1; }
-
-        .claim-btn {
-            display: flex;
-            align-items: center;
-            background: rgba(159, 25, 159, 0.05);
-            color: #ff69b4;
-            border: 1px solid rgba(122, 46, 105, 0.3);
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            padding: 0 26px;
             cursor: pointer;
+            margin-top: 20px;
             transition: all 0.3s ease;
         }
 
-        .claim-btn:hover { background: rgba(122, 46, 105, 0.1); color: #ab498f; transform: translateY(-2px); }
-
-        @media screen and (max-width: 480px) {
-            .action-wrapper { flex-direction: column; width: 100%; max-width: 275px; }
-            .claim-btn { padding: 14px; justify-content: center; }
+        .submit-btn:hover {
+            background: rgba(255,105,180,0.1);
+            color: #ff85c1; 
+            transform: translateY(-2px);
         }
 
-        /* --- STYLE CARRÉ --- */
-        .main-box-wrapper {
-            perspective: 1000px;
-            animation: slideFromRight 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
-            opacity: 0;
+        .footer-link {
+            color: #bbb;
+            font-size: 12px;
+            margin-top: 30px;
+            display: block;
+            text-decoration: none;
         }
 
-        .main-box {
-            background: rgba(0, 0, 0, 0.256);
-            border: 2px solid rgba(255, 255, 255, 0.313);
-            border-radius: 18px; 
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 375px;
-            height: 375px;
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .footer-link span { color: #ff69b4; font-weight: bold; }
+        .footer-link span:hover { text-decoration: underline; }
+
+        .error-msg {
+            color: #ff4c4c;
+            font-size: 13px;
+            margin-top: 12px;
+            font-weight: 700;
+            display: none;
+            text-align: center;
         }
 
-        .header-section { text-align: center; color: white; margin-bottom: 5px; }
-        .avatar-top { width: 85px; height: auto; margin-bottom: 5px; }
-        .username { font-size: 1.6rem; font-weight: bold; }
-        #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
+        .tos-group { margin-bottom: 5px; }
+        .tos-checkbox { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 12px; color: #aaa; text-align: left; }
+        .tos-checkbox input { display: none; }
+        .custom-checkbox { width: 16px; height: 16px; background: rgba(0,0,0,0.6); border: 1px solid #666; border-radius: 3px; position: relative; flex-shrink: 0; }
+        .tos-checkbox input:checked + .custom-checkbox { background: #ff69b4; border-color: #ff69b4; }
+        .tos-checkbox input:checked + .custom-checkbox::after { content: '✓'; color: white; font-size: 12px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); }
+        .tos-text a { color: #ff69b4; text-decoration: none; font-weight: 600; }
 
-        /* ================= ROBLOX CARD ================= */
-
-.roblox-card {
-    width: 220px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    background: rgba(255, 255, 255, 0.05);
-    border: 1.5px solid rgba(255,255,255,0.2);
-    border-radius: 18px;
-
-    padding: 10px 12px 10px 6px;
-    color: white;
-    position: relative;
-}
-
-/* logo en haut à droite */
-.roblox-card .top-right {
-    position: absolute;
-    top: 2px;
-    right: 12px;
-    display: flex;
-    align-items: center;
-}
-
-.roblox-card .logo-top {
-    width: 28px;
-    height: 28px;
-}
-
-/* avatar */
-.roblox-card .avatar-img {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    margin-right: 12px;
-}
-
-/* bloc texte */
-.roblox-card .info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    transform: translateX(-14px);
-}
-
-/* nom */
-.roblox-card .name {
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 1px;
-}
-
-/* stats */
-.roblox-card .stats {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 4px;
-}
-
-.roblox-card .stat-item {
-    display: flex;
-    align-items: center;
-    font-size: 8px;
-    color: #ccc;
-}
-
-.roblox-card .stat-icon {
-    width: 11px;
-    height: 11px;
-    margin-right: 3px;
-    filter: grayscale(100%) brightness(0.9);
-}
-
-/* bouton */
-.roblox-card .btn {
-    background: #157437;
-    color: white;
-    border: none;
-    padding: 3px 9px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 9px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.roblox-card .btn:hover {
-    background: #1c8f46;
-}
-
-
-        .music-container { width: 360px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 50px; }
-        .music-cover { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
-        .music-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-        .music-title { font-size: 10px; font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-        .music-player-row { display: flex; align-items: center; gap: 8px; }
-        .music-time-box { flex: 1; display: flex; align-items: center; gap: 6px; font-size: 8px; }
-        .music-line { flex: 1; height: 2px; background: rgba(255, 255, 255, 0.2); border-radius: 1px; overflow: hidden; }
-        .music-progress { width: 0%; height: 100%; background: #ffffff; }
-        .music-controls { display: flex; align-items: center; gap: 6px; }
-        .music-controls img { width: 16px; height: 16px; filter: brightness(0) invert(1); cursor: pointer; }
-
-        @media screen and (min-width: 1024px) {
-    .navbar {
-        width: 50%;       /* ← largeur PC */
-        max-width: 900px; /* ← limite max */
-    }
-}
+        img { user-select: none; pointer-events: none; }
     </style>
 </head>
-
 <body>
+    <div class="auth-card">
+        <h2 class="title reveal del-1">
+            <img src="images/logo.png" alt="Yosakura Logo" class="site-logo">
+        </h2>
 
-<nav class="navbar" id="navbar">
-    <a href="/" class="brand">
-        <div class="brand-text">yoskr<span>.</span>lol</div>
-    </a>
+        <p class="subtitle reveal del-2">creat an account with yosakura.lol.</p>
 
-    <button class="menu-btn" id="menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+        <div class="input-group reveal del-3">
+            <label class="input-label">Username</label>
+            <img src="images/username.png" alt="icon">
+            <input type="text" id="username" class="form-input" placeholder="Choose a username">
+        </div>
 
-    <div class="nav-group" id="nav-links-container">
-        <a href="https://discord.gg/976HCmzmnN" class="nav-link" target="_blank" rel="noopener">Discord</a>
-        <a href="#" class="nav-link">Leaderboard</a>
-        <a href="#" class="nav-link">Team</a>
-        <div id="mobile-auth-placeholder" class="mobile-only"></div>
+        <div class="input-group reveal del-4">
+            <label class="input-label">E-Mail</label>
+            <img src="images/email.png" alt="icon">
+            <input type="email" id="email" class="form-input" placeholder="name@example.com">
+        </div>
+
+        <div class="input-group reveal del-5">
+            <label class="input-label">Password</label>
+            <img src="images/password.png" alt="icon">
+            <input type="password" id="pass" class="form-input" placeholder="Minimum 6 characters">
+        </div>
+
+        <div class="input-group tos-group reveal del-6">
+            <label class="tos-checkbox">
+                <input type="checkbox" id="tosCheck">
+                <span class="custom-checkbox"></span>
+                <span class="tos-text">You need to accept the <a href="/terms" target="_blank" rel="noopener">ToS</a></span>
+            </label>
+        </div>
+
+        <button class="submit-btn reveal del-7" id="signupBtn">Create Account</button>
+        <div id="errorMsg" class="error-msg"></div>
+
+        <a href="/login" class="footer-link reveal del-8">
+            Already have an account? <span>Login</span>
+        </a>
     </div>
 
-    <div class="nav-group" id="auth-section"></div>
-</nav>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-<main class="hero-container">
-    <div class="hero-content">
-        <div class="hero-content-titles">
-            <h1 class="hero-title">All You <span class="highlight">Are</span>,</h1>
-            <h2 class="hero-subtitle">In One Place.</h2>
-        </div>
-        <p class="hero-description">The ultimate destination to craft your digital identity and share your world with the aesthetic it deserves.</p>
-        <div class="action-wrapper">
-            <div class="claim-container">
-                <span class="claim-prefix">yosakura.lol/</span>
-                <input type="text" class="claim-input" placeholder="username">
-            </div>
-            <button class="claim-btn">Claim Username</button>
-        </div>
-    </div>
-
-    <div class="main-box-wrapper">
-        <div class="main-box" id="mainBox">
-            <div class="header-section">
-                <img class="avatar-top" src="https://i.postimg.cc/HLchMMdR/b9e8db33168a26c9ca697a05ddc80937-removebg-preview.png">
-                <div class="username">yosakura.lol</div>
-                <div id="subtitle">15yo ,web-dev</div>
-            </div>
-
-            <div class="roblox-card">
-                <div class="top-right">
-                    <img src="https://i.postimg.cc/G20ScJ5H/fe033798649b136ee17373d4881d9578-removebg-preview.png" class="logo-top">
-                </div>
-                <img id="roblox-avatar" class="avatar-img" src="https://static.rbxcdn.com/pngs/avatar-placeholder.png">
-                <div class="info">
-                    <div class="name" id="roblox-username">Chargement...</div>
-                    <div class="stats">
-                        <span class="stat-item">
-                            <img src="https://i.postimg.cc/Vsg4T8mb/1b0626128696bd51131b93a3f404b2a3-removebg-preview.png" class="stat-icon">
-                            <span id="roblox-friends">0 Friends</span>
-                        </span>
-                        <span class="stat-item">
-                            <img src="https://i.postimg.cc/pLYm00JM/image-removebg-preview.png" class="stat-icon">
-                            <span id="roblox-followers">0 Followers</span>
-                        </span>
-                    </div>
-                    <button class="btn" id="roblox-profileBtn">View Profile</button>
-                </div>
-            </div>
-
-            <div class="music-container">
-                <img class="music-cover" id="cover" src="" alt="Cover">
-                <div class="music-content">
-                    <div class="music-title" id="music-title">Chargement...</div>
-                    <div class="music-player-row">
-                        <div class="music-time-box">
-                            <span id="current-time">0:00</span>
-                            <div class="music-line"><div class="music-progress" id="progress"></div></div>
-                        </div>
-                        <div class="music-controls">
-                            <img id="prev" src="https://i.postimg.cc/c4zmgfJj/arriere.png">
-<img
-  id="play-pause"
-  src="https://i.postimg.cc/Gh1r0gG3/reprendre.png"
-  data-play="https://i.postimg.cc/RhVRfRKr/pause.png"
-  data-pause="https://i.postimg.cc/Gh1r0gG3/reprendre.png"
->
-                            <img id="next" src="https://i.postimg.cc/KYMsvJrJ/suivant.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-
-<audio id="audio" loop></audio>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
-    authDomain: "fir-deffe.firebaseapp.com",
-    projectId: "fir-deffe",
-    storageBucket: "fir-deffe.firebasestorage.app",
-    messagingSenderId: "758364730866",
-    appId: "1:758364730866:web:feae96430aa5b8512da76b"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.handleLogout = () => signOut(auth);
-
-onAuthStateChanged(auth, (user) => {
-    const authSection = document.getElementById('auth-section');
-    const mobileAuth = document.getElementById('mobile-auth-placeholder');
-    let content = user ? 
-        `<div style="display:flex;align-items:center;gap:12px;background:rgba(25,136,0,0.1);border:1px solid #198800;padding:8px 16px;border-radius:12px;">
-            <span>${user.displayName || user.email.split('@')[0]}</span>
-            <button onclick="handleLogout()" style="background:none;border:none;color:#ff4d4d;cursor:pointer;font-size:11px;text-decoration:underline;">Logout</button>
-        </div>` : 
-        `<a href="/login" class="nav-link">Login</a><a href="/signup" class="signup-btn">Sign Up</a>`;
-
-    if(authSection) authSection.innerHTML = content;
-    if(mobileAuth) mobileAuth.innerHTML = content;
-});
-
-const menuBtn = document.getElementById('menu-btn');
-const navbar = document.getElementById('navbar');
-
-if(menuBtn) {
-    menuBtn.addEventListener('click', () => {
-        navbar.classList.toggle('open');
-        const spans = menuBtn.querySelectorAll('span');
-        if(navbar.classList.contains('open')) {
-            spans[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
-            spans[1].style.opacity = "0";
-            spans[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
-        } else {
-            spans[0].style.transform = "none";
-            spans[1].style.opacity = "1";
-            spans[2].style.transform = "none";
-        }
-    });
-}
-
-const mainBox = document.getElementById("mainBox");
-if(mainBox) {
-    mainBox.addEventListener("mousemove", (e) => {
-        const rect = mainBox.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        mainBox.style.transform = `rotateX(${(y - 0.5) * 20}deg) rotateY(${(x - 0.5) * -20}deg)`;
-    });
-    mainBox.addEventListener("mouseleave", () => mainBox.style.transform = "rotateX(0deg) rotateY(0deg)");
-}
-
-const audio = document.getElementById("audio");
-const playPauseBtn = document.getElementById("play-pause");
-const progress = document.getElementById("progress");
-const tracks = [
-    {src:"https://files.catbox.moe/ieb3np.mp3", title:"Dancing with your eyes closed", cover:"https://i.postimg.cc/tJYynTvQ/1d50d94246ed3f370baa1759b6b876c4.jpg"},
-    {src:"https://files.catbox.moe/bf0da2.mp3", title:"Century", cover:"https://i.postimg.cc/52v4mXxZ/esdeekid.jpg"}
-];
-let currentTrack = 0;
-
-function loadTrack(index, play = false) {
-    currentTrack = (index + tracks.length) % tracks.length;
-    audio.src = tracks[currentTrack].src;
-    document.getElementById("cover").src = tracks[currentTrack].cover;
-    document.getElementById("music-title").textContent = tracks[currentTrack].title;
-    if(play) audio.play();
-}
-
-if (playPauseBtn) {
-
-    function syncButton() {
-        playPauseBtn.src = audio.paused
-            ? playPauseBtn.dataset.play
-            : playPauseBtn.dataset.pause;
-    }
-
-    playPauseBtn.onclick = () => {
-        audio.paused ? audio.play() : audio.pause();
-    };
-
-    document.getElementById("next").onclick = () => {
-        loadTrack(currentTrack + 1, true);
-    };
-
-    document.getElementById("prev").onclick = () => {
-        loadTrack(currentTrack - 1, true);
-    };
-
-    audio.onplay = syncButton;
-    audio.onpause = syncButton;
-
-    syncButton(); // 🔥 synchronisation initiale
-}
-
-
-audio.ontimeupdate = () => {
-    progress.style.width = (audio.currentTime / audio.duration * 100) + "%";
-    const m = Math.floor(audio.currentTime / 60);
-    const s = Math.floor(audio.currentTime % 60).toString().padStart(2, "0");
-    document.getElementById("current-time").textContent = `${m}:${s}`;
-};
-
-async function loadRoblox() {
-    try {
-        const id = 1; 
-        const user = await fetch(`https://users.roproxy.com/v1/users/${id}`).then(r => r.json());
-        document.getElementById('roblox-username').textContent = user.displayName;
-        const thumb = await fetch(`https://thumbnails.roproxy.com/v1/users/avatar?userIds=${id}&size=150x150&format=Png`).then(r => r.json());
-        document.getElementById('roblox-avatar').src = thumb.data[0].imageUrl;
-        const friends = await fetch(`https://friends.roproxy.com/v1/users/${id}/friends/count`).then(r => r.json());
-        document.getElementById('roblox-friends').textContent = `${friends.count || 0} Friends`;
-        const followers = await fetch(`https://friends.roproxy.com/v1/users/${id}/followers/count`).then(r => r.json());
-        document.getElementById('roblox-followers').textContent = `${followers.count || 0} Followers`;
-        document.getElementById('roblox-profileBtn').onclick = () => {
-            window.open(`https://www.roblox.com/users/${id}/profile`, '_blank');
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
+            authDomain: "fir-deffe.firebaseapp.com",
+            projectId: "fir-deffe",
+            storageBucket: "fir-deffe.firebasestorage.app",
+            messagingSenderId: "758364730866",
+            appId: "1:758364730866:web:feae96430aa5b8512da76b"
         };
-    } catch (e) {
-        console.error("Erreur Roblox:", e);
-    }
-}
 
-loadRoblox();
-loadTrack(0);
-document.addEventListener('contextmenu', e => e.preventDefault());
-</script>
+        const auth = getAuth(initializeApp(firebaseConfig));
+        const errorMsg = document.getElementById('errorMsg');
 
+        document.getElementById('signupBtn').onclick = async () => {
+            errorMsg.style.display = "none";
+            const tosAccepted = document.getElementById('tosCheck').checked;
+            if(!tosAccepted) {
+                errorMsg.textContent = "You must accept the ToS to create an account.";
+                errorMsg.style.display = "block";
+                return;
+            }
+
+            try {
+                const username = document.getElementById('username').value.trim();
+                const email = document.getElementById('email').value;
+                const pass = document.getElementById('pass').value;
+                if(!username) {
+                    errorMsg.textContent = "Veuillez choisir un nom d'utilisateur.";
+                    errorMsg.style.display = "block";
+                    return;
+                }
+                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                await updateProfile(userCredential.user, { displayName: username });
+                window.location.href = "/";
+            } catch(e) {
+                errorMsg.textContent = e.message;
+                errorMsg.style.display = "block";
+            }
+        };
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
 </body>
 </html>
