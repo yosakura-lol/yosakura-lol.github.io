@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+'<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -83,7 +83,7 @@ html,body {
 .mobile-only { display: none; }
 
 @media screen and (max-width: 768px) {
-    .navbar { max-height: 60px; }
+    .navbar { max-height: px; }
     .navbar.open { max-height: 400px; }
     .menu-btn { display: block; }
     #nav-links-container {
@@ -100,13 +100,19 @@ html,body {
 .tos-wrapper { display: flex; justify-content: center; padding: 180px 20px 100px; }
 .tos-card { width: 100%; max-width: 900px; background: rgb(30, 30, 30); backdrop-filter: blur(12px); border-radius: 22px; padding: 60px; animation: cardIn 1s cubic-bezier(0.2,0.9,0.2,1) forwards; border: 1px solid #828282a3; box-sizing: border-box;}
 .tos-card h1 { font-size: 36px; margin-bottom: 10px; }
-.tos-card h2 { margin-top: 40px; font-size: 22px; color: #21b200; }
+.tos-card h2 { margin-top: 40px; font-size: 22px; color: #ffffff; }
 .tos-card p { line-height: 1.7; font-size: 14px; margin-top: 15px; color: #ccc; }
 .tos-card ul { margin-top: 15px; padding-left: 20px; }
 .tos-card li { margin-bottom: 10px; font-size: 14px; color: #ccc; }
 
 ::-webkit-scrollbar{width:0;height:0;}
 img{user-select:none;pointer-events:none;}
+@media screen and (min-width: 1024px) {
+    .navbar {
+        width: 50%;       /* ← largeur PC */
+        max-width: 900px; /* ← limite max */
+    }
+}
 </style>
 </head>
 <body>
@@ -260,4 +266,4 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
 </body>
-</html>
+</html>'
