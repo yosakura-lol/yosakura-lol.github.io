@@ -21,7 +21,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow: auto ;
+            padding-top: 20px;
         }
 
         .auth-card {
@@ -167,9 +168,13 @@
         img { user-select: none; pointer-events: none; }
         @media screen and (max-width: 480px) {
     body, html {
-        overflow: auto; /* Permet le scroll */
+        display: block; /* plus de flex centré */
+        overflow-y: auto; /* scroll vertical possible */
+        padding-top: 20px; /* petit espace au dessus */
     }
 }
+
+
 
     </style>
 </head>
