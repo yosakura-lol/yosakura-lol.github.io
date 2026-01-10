@@ -26,19 +26,21 @@
         }
 
         .auth-card {
-            background: rgb(30, 30, 30);
-            backdrop-filter: blur(12px);
-            width: 380px; /* Largeur fixe pour PC */
-            padding: 130px 35px 30px 35px;
-            border-radius: 20px;
-            border: 1px solid #828282a3;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            color: white;
-            animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
-            box-sizing: border-box; /* Assure que le padding ne dépasse pas */
-        }
+    background: rgb(30, 30, 30);
+    backdrop-filter: blur(12px);
+    width: 380px;               /* Largeur pour PC */
+    max-width: 90%;             /* Adaptatif sur mobile */
+    padding: 130px 35px 30px 35px;
+    border-radius: 20px;
+    border: 1px solid #828282a3;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    color: white;
+    animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
+    box-sizing: border-box;     /* padding inclus dans la largeur */
+    margin: 20px auto;          /* centré horizontalement */
+}
 
         /* AJUSTEMENT POUR TÉLÉPHONE */
         @media screen and (max-width: 480px) {
