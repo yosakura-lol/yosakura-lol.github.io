@@ -208,7 +208,7 @@
 
         .main-box {
             background: rgba(0, 0, 0, 0.256);
-            border: 2px solid rgba(10, 125, 39, 0.313);
+            border: 2px solid rgba(255, 255, 255, 0.313);
             border-radius: 18px; 
             padding: 25px;
             backdrop-filter: blur(10px);
@@ -228,22 +228,101 @@
         .username { font-size: 1.6rem; font-weight: bold; }
         #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
 
-        .roblox-card {
-            width: 240px; height: 55px; 
-            display: flex; align-items: center; justify-content: flex-start;
-            background: rgba(255, 255, 255, 0.05); border: 1.5px solid rgba(255,255,255,0.2);
-            border-radius: 18px; padding: 10px; color: white; position: relative;
-        }
+        /* ================= ROBLOX CARD ================= */
 
-        .roblox-card .top-right { position: absolute; top: 2px; right: 12px; display: flex; align-items: center; }
-        .roblox-card .logo-top { width: 28px; height: 28px; }
-        .roblox-card .avatar-img { width: 75px; height: 75px; object-fit: cover; margin-right: -5px; }
-        .roblox-card .info { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
-        .roblox-card .name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
-        .roblox-card .stats { display: flex; gap: 8px; margin-bottom: 5px; }
-        .roblox-card .stat-item { display: flex; align-items: center; font-size: 9px; color: #ccc; }
-        .roblox-card .stat-icon { width: 12px; height: 12px; margin-right: 3px; filter: grayscale(100%) brightness(0.9); }
-        .roblox-card .btn { background: #157437; color: white; border: none; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; cursor: pointer; }
+.roblox-card {
+    width: 220px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 18px;
+
+    padding: 10px 12px 10px 6px;
+    color: white;
+    position: relative;
+}
+
+/* logo en haut à droite */
+.roblox-card .top-right {
+    position: absolute;
+    top: 2px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.roblox-card .logo-top {
+    width: 28px;
+    height: 28px;
+}
+
+/* avatar */
+.roblox-card .avatar-img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    margin-right: 12px;
+}
+
+/* bloc texte */
+.roblox-card .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transform: translateX(-14px);
+}
+
+/* nom */
+.roblox-card .name {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 1px;
+}
+
+/* stats */
+.roblox-card .stats {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.roblox-card .stat-item {
+    display: flex;
+    align-items: center;
+    font-size: 8px;
+    color: #ccc;
+}
+
+.roblox-card .stat-icon {
+    width: 11px;
+    height: 11px;
+    margin-right: 3px;
+    filter: grayscale(100%) brightness(0.9);
+}
+
+/* bouton */
+.roblox-card .btn {
+    background: #157437;
+    color: white;
+    border: none;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 9px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.roblox-card .btn:hover {
+    background: #1c8f46;
+}
+
 
         .music-container { width: 360px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 50px; }
         .music-cover { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
@@ -255,6 +334,13 @@
         .music-progress { width: 0%; height: 100%; background: #ffffff; }
         .music-controls { display: flex; align-items: center; gap: 6px; }
         .music-controls img { width: 16px; height: 16px; filter: brightness(0) invert(1); cursor: pointer; }
+
+        @media screen and (min-width: 1024px) {
+    .navbar {
+        width: 50%;       /* ← largeur PC */
+        max-width: 900px; /* ← limite max */
+    }
+}
     </style>
 </head>
 
