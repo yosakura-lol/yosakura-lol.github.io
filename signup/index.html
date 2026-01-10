@@ -177,6 +177,17 @@
 }
 
 
+/* Masquer la scrollbar tout en gardant le scroll */
+html, body {
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE et Edge Legacy */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
 
     </style>
 </head>
