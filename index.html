@@ -228,11 +228,10 @@
         .username { font-size: 1.6rem; font-weight: bold; }
         #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
 
-        /* ================= ROBLOX CARD ================= */
 
 .roblox-card {
-    width: 220px;
-    height: 55px;
+    width: 190px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -241,7 +240,7 @@
     border: 1.5px solid rgba(255,255,255,0.2);
     border-radius: 18px;
 
-    padding: 10px 12px 10px 6px;
+    padding: 6px 10px 6px 4px; /* moins de padding pour réduire la taille globale */
     color: white;
     position: relative;
 }
@@ -250,22 +249,22 @@
 .roblox-card .top-right {
     position: absolute;
     top: 2px;
-    right: 12px;
+    right: 8px; /* légèrement plus proche du bord */
     display: flex;
     align-items: center;
 }
 
 .roblox-card .logo-top {
-    width: 28px;
-    height: 28px;
+    width: 22px; /* plus petit */
+    height: 22px;
 }
 
 /* avatar */
 .roblox-card .avatar-img {
-    width: 72px;
-    height: 72px;
+    width: 60px; /* plus petit */
+    height: 60px;
     object-fit: cover;
-    margin-right: 12px;
+    margin-right: 8px; /* réduit pour rapprocher du texte */
 }
 
 /* bloc texte */
@@ -275,34 +274,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    transform: translateX(-14px);
+    transform: translateX(-8px); /* avatar plus à gauche */
 }
 
 /* nom */
 .roblox-card .name {
     font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 1px;
+    font-size: 11px; /* plus petit */
+    margin-bottom: 0; 
 }
 
 /* stats */
 .roblox-card .stats {
     display: flex;
-    gap: 6px;
-    margin-bottom: 4px;
+    gap: 4px; /* réduit */
+    margin-bottom: 2px;
 }
 
 .roblox-card .stat-item {
     display: flex;
     align-items: center;
-    font-size: 8px;
+    font-size: 7px; /* plus petit */
     color: #ccc;
 }
 
 .roblox-card .stat-icon {
-    width: 11px;
-    height: 11px;
-    margin-right: 3px;
+    width: 9px; /* réduit */
+    height: 9px;
+    margin-right: 2px;
     filter: grayscale(100%) brightness(0.9);
 }
 
@@ -311,10 +310,10 @@
     background: #157437;
     color: white;
     border: none;
-    padding: 3px 9px;
+    padding: 2px 6px; /* plus petit */
     border-radius: 4px;
     font-weight: 700;
-    font-size: 9px;
+    font-size: 8px; /* réduit */
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -322,6 +321,7 @@
 .roblox-card .btn:hover {
     background: #1c8f46;
 }
+
 
 
         .music-container { width: 360px; display: flex; align-items: center; gap: 12px; color: white; margin-top: 50px; }
@@ -341,6 +341,7 @@
         max-width: 900px; /* ← limite max */
     }
 }
+
     </style>
 </head>
 
