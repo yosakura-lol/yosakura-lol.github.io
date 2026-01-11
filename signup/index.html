@@ -234,60 +234,48 @@ body::-webkit-scrollbar {
     </div>
 
     <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    // 1. On ajoute Firestore
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
-        authDomain: "fir-deffe.firebaseapp.com",
-        projectId: "fir-deffe",
-        storageBucket: "fir-deffe.firebasestorage.app",
-        messagingSenderId: "758364730866",
-        appId: "1:758364730866:web:feae96430aa5b8512da76b"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
+            authDomain: "fir-deffe.firebaseapp.com",
+            projectId: "fir-deffe",
+            storageBucket: "fir-deffe.firebasestorage.app",
+            messagingSenderId: "758364730866",
+            appId: "1:758364730866:web:feae96430aa5b8512da76b"
+        };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app); // Initialiser la base de données
-    const errorMsg = document.getElementById('errorMsg');
+        const auth = getAuth(initializeApp(firebaseConfig));
+        const errorMsg = document.getElementById('errorMsg');
 
-    document.getElementById('signupBtn').onclick = async () => {
-        errorMsg.style.display = "none";
-        const tosAccepted = document.getElementById('tosCheck').checked;
-        
-        if(!tosAccepted) {
-            errorMsg.textContent = "You must accept the ToS.";
-            errorMsg.style.display = "block";
-            return;
-        }
+        document.getElementById('signupBtn').onclick = async () => {
+            errorMsg.style.display = "none";
+            const tosAccepted = document.getElementById('tosCheck').checked;
+            if(!tosAccepted) {
+                errorMsg.textContent = "You must accept the ToS to create an account.";
+                errorMsg.style.display = "block";
+                return;
+            }
 
-        const username = document.getElementById('username').value.trim().toLowerCase(); // On met en minuscule pour l'URL
-        const email = document.getElementById('email').value;
-        const pass = document.getElementById('pass').value;
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-            const user = userCredential.user;
-
-            // B. Mettre à jour le profil
-            await updateProfile(user, { displayName: username });
-
-            await setDoc(doc(db, "users", username), {
-                uid: user.uid,
-                username: username,
-                bio: "Bienvenue sur ma page !",
-                theme: "dark",
-                links: [] // Liste de liens vide au départ
-            });
-
-            window.location.href = "/dashboard"; 
-        } catch(e) {
-            errorMsg.textContent = e.message;
-            errorMsg.style.display = "block";
-        }
-    };
-</script>
+            try {
+                const username = document.getElementById('username').value.trim();
+                const email = document.getElementById('email').value;
+                const pass = document.getElementById('pass').value;
+                if(!username) {
+                    errorMsg.textContent = "Veuillez choisir un nom d'utilisateur.";
+                    errorMsg.style.display = "block";
+                    return;
+                }
+                const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+                await updateProfile(userCredential.user, { displayName: username });
+                window.location.href = "/";
+            } catch(e) {
+                errorMsg.textContent = e.message;
+                errorMsg.style.display = "block";
+            }
+        };
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
 </body>
 </html>
