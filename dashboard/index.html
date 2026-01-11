@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yosakura | Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --card: #0f0f0f;
+            --accent: #ffffff;
+            --border: rgba(255, 255, 255, 0.08);
+            --text-gray: #888;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .container { width: 100%; max-width: 600px; }
+
+        h1 { font-size: 22px; font-weight: 600; margin-bottom: 5px; text-align: center; }
+        .user-welcome { color: var(--text-gray); font-size: 14px; text-align: center; margin-bottom: 40px; }
+
+        .section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title { font-size: 12px; text-transform: uppercase; color: var(--text-gray); letter-spacing: 2px; margin-bottom: 20px; font-weight: 600; }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group:last-child { margin-bottom: 0; }
+        
+        label { display: block; font-size: 11px; color: #555; margin-bottom: 8px; font-weight: 600; }
+
+        input {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            color: white;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--accent); }
+
+        .btn-save {
+            width: 100%;
+            background: white;
+            color: black;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-save:hover { transform: scale(1.02); background: #ccc; }
+
+        .status {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 15px;
+            color: #43b581;
+            display: none;
+        }
+
+        .logout {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #ff4747;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Customiser ton profil</h1>
+    <div class="user-welcome">Connecté en tant que <span id="username-display">...</span></div>
+
+    <div class="section">
+        <div class="section-title">Apparence</div>
+        <div class="input-group">
+            <label>URL DE L'AVATAR (JPG/PNG)</label>
+            <input type="text" id="avatar-url" placeholder="https://i.postimg.cc/...">
+        </div>
+        <div class="input-group">
+            <label>URL DU FOND (VIDÉO MP4)</label>
+            <input type="text" id="bg-url" placeholder="https://files.catbox.moe/...">
+        </div>
+        <div class="input-group">
+            <label>TEXTE DE LA BIO (ANIMÉ)</label>
+            <input type="text" id="bio-text" placeholder="Owner of yskr.lol">
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Musique</div>
+        <div class="input-group">
+            <label>URL DU FICHIER AUDIO (MP3)</label>
+            <input type="text" id="music-url" placeholder="https://files.catbox.moe/...">
+        </div>
+        <div class="input-group">
+            <label>TITRE DE LA MUSIQUE</label>
+            <input type="text" id="music-title-input" placeholder="Ex: TOXIC">
+        </div>
+        <div class="input-group">
+            <label>URL DE LA POCHETTE (IMAGE)</label>
+            <input type="text" id="music-cover-url" placeholder="Lien vers l'image du disque">
+        </div>
+    </div>
+
+    <button class="btn-save" id="saveBtn">Sauvegarder les changements</button>
+    <div id="status-msg" class="status">✓ Profil mis à jour instantanément</div>
+    
+    <div class="logout" id="logoutBtn">Déconnexion</div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
+        authDomain: "fir-deffe.firebaseapp.com",
+        projectId: "fir-deffe",
+        storageBucket: "fir-deffe.firebasestorage.app",
+        messagingSenderId: "758364730866",
+        appId: "1:758364730866:web:feae96430aa5b8512da76b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUsername = "";
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUsername = user.displayName.toLowerCase();
+            document.getElementById('username-display').textContent = user.displayName;
+
+            // Charger les données actuelles
+            const docRef = doc(db, "users", currentUsername);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('avatar-url').value = data.avatar || "";
+                document.getElementById('bg-url').value = data.background || "";
+                document.getElementById('bio-text').value = data.bio || "";
+                document.getElementById('music-url').value = data.music_url || "";
+                document.getElementById('music-title-input').value = data.music_title || "";
+                document.getElementById('music-cover-url').value = data.music_cover || "";
+            }
+        } else {
+            window.location.href = "/login";
+        }
+    });
+
+    document.getElementById('saveBtn').onclick = async () => {
+        const docRef = doc(db, "users", currentUsername);
+        try {
+            await updateDoc(docRef, {
+                avatar: document.getElementById('avatar-url').value,
+                background: document.getElementById('bg-url').value,
+                bio: document.getElementById('bio-text').value,
+                music_url: document.getElementById('music-url').value,
+                music_title: document.getElementById('music-title-input').value,
+                music_cover: document.getElementById('music-cover-url').value
+            });
+            const status = document.getElementById('status-msg');
+            status.style.display = "block";
+            setTimeout(() => status.style.display = "none", 3000);
+        } catch (e) {
+            alert("Erreur de sauvegarde : " + e.message);
+        }
+    };
+
+    document.getElementById('logoutBtn').onclick = () => signOut(auth);
+</script>
+</body>
+</html>
