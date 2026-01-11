@@ -427,9 +427,9 @@
             </div>
 
             <div class="badges-container">
-                <div class="badge" data-title="Winner"><img src="https://i.postimg.cc/NFbYrKgJ/winner.png"></div>
-                <div class="badge" data-title="Vérifié"><img src="https://i.postimg.cc/hPycDQZh/verify.png"></div>
-                <div class="badge" data-title="Artiste"><img src="https://i.postimg.cc/Z5WZCYXH/artiste.png"></div>
+                <div class="badge" data-title="Winner"><img src="images/winner.png"></div>
+                <div class="badge" data-title="Vérifié"><img src="images/verify.png"></div>
+                <div class="badge" data-title="Artiste"><img src="images/artiste.png"></div>
             </div>
 
             <div class="discord-card" id="discord-card">
@@ -565,7 +565,7 @@ audio.ontimeupdate = () => {
     document.getElementById("current-time").textContent = `${m}:${s}`;
 };
 
-const DISCORD_ID = '929651828747014164';
+const DISCORD_ID = '977854043324035144';
 async function fetchDiscordStatus() {
     try {
         const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
