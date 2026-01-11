@@ -199,7 +199,7 @@
             .claim-btn { padding: 14px; justify-content: center; }
         }
 
-        /* --- STYLE CARRÉ --- */
+        /* --- MAIN BOX --- */
         .main-box-wrapper {
             perspective: 1000px;
             animation: slideFromRight 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.5s;
@@ -217,7 +217,7 @@
             align-items: center;
             gap: 15px;
             width: 375px;
-            height: 375px;
+            min-height: 400px;
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -225,10 +225,71 @@
 
         .header-section { text-align: center; color: white; margin-bottom: 5px; }
         .avatar-top { width: 85px; height: auto; margin-bottom: 5px;border-radius: 50px; }
-        .username { font-size: 1.6rem; font-weight: bold; }
+
+        /* EFFET UID AU SURVOL */
+        .username { 
+            position: relative;
+            font-size: 1.6rem; 
+            font-weight: bold; 
+            cursor: default;
+        }
+        .username::after {
+            content: "uid 1";
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .username:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
         #subtitle { font-size: 0.9rem; min-height: 1.2em; color: #bbb; }
 
-        /* ADAPTATION DISCORD CARD TAILLE ROBLOX */
+        /* BADGES STYLE */
+        .badges-container {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 5px 0;
+        }
+        .badge {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .badge img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+            cursor: pointer;
+        }
+        .badge::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 5px;²
+            white-space: nowrap;
+            opacity: 0;
+            transition: 0.3s ease;
+            pointer-events: none;
+        }
+        .badge:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* DISCORD CARD */
         .discord-card {
             width: 190px;
             height: 45px;
@@ -346,6 +407,12 @@
                 <img class="avatar-top" src="images/avatar-top.jpg">
                 <div class="username">yosakura.lol</div>
                 <div id="subtitle">15yo ,web-dev</div>
+            </div>
+
+            <div class="badges-container">
+                <div class="badge" data-title="Winner"><img src="https://i.postimg.cc/NFbYrKgJ/winner.png"></div>
+                <div class="badge" data-title="Vérifié"><img src="https://i.postimg.cc/hPycDQZh/verify.png"></div>
+                <div class="badge" data-title="Artiste"><img src="https://i.postimg.cc/Z5WZCYXH/artiste.png"></div>
             </div>
 
             <div class="discord-card" id="discord-card">
@@ -481,7 +548,6 @@ audio.ontimeupdate = () => {
     document.getElementById("current-time").textContent = `${m}:${s}`;
 };
 
-// --- DISCORD LANYARD LOGIC ---
 const DISCORD_ID = '929651828747014164';
 async function fetchDiscordStatus() {
     try {
