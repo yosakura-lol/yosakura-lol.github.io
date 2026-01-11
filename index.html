@@ -486,15 +486,26 @@ window.handleLogout = () => signOut(auth);
 onAuthStateChanged(auth, (user) => {
     const authSection = document.getElementById('auth-section');
     const mobileAuth = document.getElementById('mobile-auth-placeholder');
-    let content = user ? 
-        `<div style="display:flex;align-items:center;gap:12px;background:rgba(25,136,0,0.1);border:1px solid #198800;padding:8px 16px;border-radius:12px;">
+    
+    if (user) {
+        // --- NOUVEAU : REDIRECTION AUTOMATIQUE ---
+        // Si l'utilisateur est connecté, on l'envoie direct au dashboard
+        window.location.href = "/dashboard"; 
+        
+        // Optionnel : au cas où la redirection prend du temps, on affiche son nom
+        let content = `
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(25,136,0,0.1);border:1px solid #198800;padding:8px 16px;border-radius:12px;">
             <span>${user.displayName || user.email.split('@')[0]}</span>
             <button onclick="handleLogout()" style="background:none;border:none;color:#ff4d4d;cursor:pointer;font-size:11px;text-decoration:underline;">Logout</button>
-        </div>` : 
-        `<a href="/login" class="nav-link">Login</a><a href="/signup" class="signup-btn">Sign Up</a>`;
-
-    if(authSection) authSection.innerHTML = content;
-    if(mobileAuth) mobileAuth.innerHTML = content;
+        </div>`;
+        if(authSection) authSection.innerHTML = content;
+        if(mobileAuth) mobileAuth.innerHTML = content;
+    } else {
+        // Si pas connecté, on affiche les boutons Login / Sign Up normalement
+        let content = `<a href="/login" class="nav-link">Login</a><a href="/signup" class="signup-btn">Sign Up</a>`;
+        if(authSection) authSection.innerHTML = content;
+        if(mobileAuth) mobileAuth.innerHTML = content;
+    }
 });
 
 // Menu Logic
