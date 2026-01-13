@@ -196,7 +196,7 @@
             <div class="rectangle bottom">
                 <img class="music-cover" id="cover" src="">
                 <div class="music-info">
-                    <div class="music-time">
+                    <div class="music-title" id="music-title">
                         <span id="current-time">0:00</span>
                         <div class="music-line"><div class="music-progress" id="progress"></div></div>
                         <span id="duration">0:00</span>
@@ -215,27 +215,29 @@
 
     <script>
         async function loadUserData() {
-        try {
-            const response = await fetch('./data.json');
-            const data = await response.json();
+    try {
+        const response = await fetch('./data.json');
+        const data = await response.json();
 
-            document.getElementById('display-username').textContent = data.username.toUpperCase();
-            document.getElementById('user-avatar').src = data.avatar;
-            document.getElementById('bg-video-src').src = data.video;
-            document.getElementById('bg-video').load(); 
-            
-            DISCORD_ID = data.discord_id;
-            updateDiscord(); 
+        // Met à jour le texte et les médias
+        document.getElementById('display-username').textContent = data.username.toUpperCase();
+        document.getElementById('user-avatar').src = data.avatar;
+        document.getElementById('bg-video-src').src = data.video;
+        document.getElementById('bg-video').load(); 
+        
+        // Stocke l'ID Discord et les musiques
+        DISCORD_ID = data.discord_id;
+        tracks = data.tracks; 
 
-            window.tracks = data.tracks; 
-            loadTrack(0);
+        // Lance les fonctions dépendantes
+        updateDiscord(); 
+        loadTrack(0);
+        startTypewriter(data.subtitle); 
 
-            startTypewriter(data.subtitle); 
-
-        } catch (e) {
-            console.error("Erreur de chargement des données", e);
-        }
+    } catch (e) {
+        console.error("Erreur de chargement", e);
     }
+}
 
     loadUserData();
 
@@ -373,16 +375,5 @@
     })();
     document.oncontextmenu = e => e.preventDefault();
     </script>
-    <script>
-    fetch('./data.json')
-        .then(response => response.json())
-        .then(data => {
-            // On met à jour les éléments de la page avec les vraies données
-            if(data.subtitle) document.getElementById('bio-display').textContent = data.subtitle;
-            if(data.video) document.getElementById('video-player').src = data.video;
-            if(data.discord_id) document.getElementById('discord-display').textContent = data.discord_id;
-        })
-        .catch(err => console.error("Erreur de chargement des données:", err));
-</script>
     </body>
     </html>
