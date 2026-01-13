@@ -204,42 +204,73 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
-            authDomain: "fir-deffe.firebaseapp.com",
-            projectId: "fir-deffe",
-            storageBucket: "fir-deffe.firebasestorage.app",
-            messagingSenderId: "758364730866",
-            appId: "1:758364730866:web:feae96430aa5b8512da76b"
-        };
+// Ta configuration Firebase (ne change rien ici)
+const firebaseConfig = {
+    apiKey: "AIzaSyC8hhDek0GuNk8y9e23l8lGf4PQ2cj_Hzc",
+    authDomain: "fir-deffe.firebaseapp.com",
+    projectId: "fir-deffe",
+    storageBucket: "fir-deffe.firebasestorage.app",
+    messagingSenderId: "758364730866",
+    appId: "1:758364730866:web:feae96430aa5b8512da76b"
+};
 
-        const auth = getAuth(initializeApp(firebaseConfig));
-        const errorMsg = document.getElementById('errorMsg');
+const auth = getAuth(initializeApp(firebaseConfig));
+const errorMsg = document.getElementById('errorMsg');
 
-        document.getElementById('loginBtn').onclick = async () => {
-            errorMsg.style.display = "none";
-            const tosAccepted = document.getElementById('tosCheck').checked;
-            if (!tosAccepted) {
-                errorMsg.textContent = "You must accept the ToS to continue.";
-                errorMsg.style.display = "block";
-                return;
-            }
+document.getElementById('loginBtn').onclick = async () => {
+    errorMsg.style.display = "none";
+    const tosAccepted = document.getElementById('tosCheck').checked;
+    
+    if (!tosAccepted) {
+        errorMsg.textContent = "You must accept the ToS to continue.";
+        errorMsg.style.display = "block";
+        return;
+    }
 
-            try {
-                await signInWithEmailAndPassword(
-                    auth,
-                    document.getElementById('email').value,
-                    document.getElementById('pass').value
-                );
-                window.location.href = "/";
-            } catch (e) {
-                errorMsg.textContent = "Incorrect credentials.";
-                errorMsg.style.display = "block";
-            }
-        };
+    try {
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            document.getElementById('email').value,
+            document.getElementById('pass').value
+        );
+const user = userCredential.user;
+    const username = user.displayName;
+
+    if (username) {
+        // On enregistre le nom pour le dashboard
+        localStorage.setItem('yosakura_user', username);
+        
+        // On redirige (Vercel utilisera le vercel.json pour comprendre /dashboard)
+        window.location.href = "/dashboard";
+    } else {
+        errorMsg.textContent = "Erreur : Aucun pseudo lié à ce compte.";
+        errorMsg.style.display = "block";
+    }
+    // ---------------------------------
+
+} catch(e) {
+    errorMsg.textContent = "Email ou mot de passe incorrect.";
+    errorMsg.style.display = "block";
+}
+        const username = userCredential.user.displayName;
+
+        if (username) {
+            localStorage.setItem('yosakura_user', username);
+            
+            window.location.href = "/dashboard";
+        } else {
+            errorMsg.textContent = "Username not found. Please contact support.";
+            errorMsg.style.display = "block";
+        }
+
+    } catch (e) {
+        errorMsg.textContent = "Incorrect email or password.";
+        errorMsg.style.display = "block";
+    }
+};
     </script>
 </body>
 </html>
