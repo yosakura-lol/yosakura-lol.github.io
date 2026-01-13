@@ -196,7 +196,6 @@
             <div class="rectangle bottom">
                 <img class="music-cover" id="cover" src="">
                 <div class="music-info">
-                    <div class="music-title" id="music-title">TOXIC</div>
                     <div class="music-time">
                         <span id="current-time">0:00</span>
                         <div class="music-line"><div class="music-progress" id="progress"></div></div>
@@ -374,5 +373,16 @@
     })();
     document.oncontextmenu = e => e.preventDefault();
     </script>
+    <script>
+    fetch('./data.json')
+        .then(response => response.json())
+        .then(data => {
+            // On met à jour les éléments de la page avec les vraies données
+            if(data.subtitle) document.getElementById('bio-display').textContent = data.subtitle;
+            if(data.video) document.getElementById('video-player').src = data.video;
+            if(data.discord_id) document.getElementById('discord-display').textContent = data.discord_id;
+        })
+        .catch(err => console.error("Erreur de chargement des données:", err));
+</script>
     </body>
     </html>
