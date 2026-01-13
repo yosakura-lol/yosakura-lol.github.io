@@ -26,30 +26,29 @@
         }
 
         .auth-card {
-    background: rgb(30, 30, 30);
-    backdrop-filter: blur(12px);
-    width: 380px;               /* Largeur pour PC */
-    max-width: 90%;             /* Adaptatif sur mobile */
-    padding: 130px 35px 30px 35px;
-    border-radius: 20px;
-    border: 1px solid #828282a3;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    color: white;
-    animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
-    box-sizing: border-box;     /* padding inclus dans la largeur */
-    margin: 20px auto;          /* centré horizontalement */
-}
+            background: rgb(30, 30, 30);
+            backdrop-filter: blur(12px);
+            width: 380px;
+            max-width: 90%;
+            padding: 130px 35px 30px 35px;
+            border-radius: 20px;
+            border: 1px solid #828282a3;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: white;
+            animation: slideInDown 0.8s cubic-bezier(0.2,1,0.2,1) forwards;
+            box-sizing: border-box;
+            margin: 20px auto;
+        }
 
-        /* AJUSTEMENT POUR TÉLÉPHONE */
         @media screen and (max-width: 480px) {
             .auth-card {
-                width: 90%; /* Bords moins larges sur mobile */
-                padding: 110px 25px 25px 25px; /* Padding légèrement réduit */
+                width: 90%;
+                padding: 110px 25px 25px 25px;
             }
             .site-logo {
-                width: 240px; /* Logo un peu plus petit sur mobile */
+                width: 240px;
                 top: -160px;
             }
         }
@@ -99,7 +98,7 @@
         .input-group img {
             position: absolute;
             left: 12px;
-            top: 40px; /* Ajusté pour l'alignement */
+            top: 40px;
             width: 18px;
             height: 18px;
             pointer-events: none;
@@ -169,26 +168,23 @@
 
         img { user-select: none; pointer-events: none; }
         @media screen and (max-width: 480px) {
-    body, html {
-        display: block; /* plus de flex centré */
-        overflow-y: auto; /* scroll vertical possible */
-        padding-top: 20px; /* petit espace au dessus */
-    }
-}
+            body, html {
+                display: block;
+                overflow-y: auto;
+                padding-top: 20px;
+            }
+        }
 
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
 
-/* Masquer la scrollbar tout en gardant le scroll */
-html, body {
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* IE et Edge Legacy */
-}
-
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
     </style>
 </head>
 <body>
@@ -267,14 +263,29 @@ body::-webkit-scrollbar {
                     errorMsg.style.display = "block";
                     return;
                 }
+
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 await updateProfile(userCredential.user, { displayName: username });
-                window.location.href = "/";
+
+                // 🔥 Créer le dossier GitHub via le backend
+                const response = await fetch("https://dashboard-backend-five-chi.vercel.app/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username })
+});
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error("Erreur serveur GitHub : " + text);
+                }
+
+                window.location.href = "/"; 
             } catch(e) {
                 errorMsg.textContent = e.message;
                 errorMsg.style.display = "block";
             }
         };
+
         document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
