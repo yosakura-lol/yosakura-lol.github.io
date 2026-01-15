@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/Zq9KD839/0e5094ca4499a1a83a012da27c8d6475-1-removebg-preview-1.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="images/LogoP.png">
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -169,11 +169,7 @@
             <div class="username">
                 <span class="u-text">41</span>
                 <div class="badges" style="position: relative; top: 0; left: 20px;">
-                    <div class="badge" data-title="Image Host"><img src="https://i.postimg.cc/ZR8J4fXh/imagehost.png"></div>
-                    <div class="badge" data-title="Winner"><img src="https://i.postimg.cc/NFbYrKgJ/winner.png"></div>
-                    <div class="badge" data-title="Vérifié"><img src="https://i.postimg.cc/hPycDQZh/verify.png"></div>
-                    <div class="badge" data-title="Artiste"><img src="https://i.postimg.cc/Z5WZCYXH/artiste.png"></div>
-                    <div class="badge" data-title="Gifter"><img src="https://i.postimg.cc/Fzc5bZ0K/gifter.png"></div>
+                    <div class="badge" data-title="IOwner"><img src="oc9/images/owner."></div>
                 </div>
             </div>
 
@@ -182,9 +178,9 @@
             <div class="separator"></div>
 
             <div class="custom-links">
-                <a href="https://www.github.com" target="_blank"><img src="https://i.postimg.cc/7PJLB7Q5/github.png"></a>
-                <a href="https://www.instagram.com" target="_blank"><img src="https://i.postimg.cc/jqnj8Nk2/instagram.png"></a>
-                <a href="https://www.tiktok.com/" target="_blank"><img src="https://i.postimg.cc/7PJLB7QG/tiktok.png"></a>
+                <a href="https://www.github.com" target="_blank"><img src="oc9/images/github.png"></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="oc9/images/instagram.png"></a>
+                <a href="https://www.tiktok.com/" target="_blank"><img src="oc9/images/tiktok.png"></a>
             </div>
         </div>
 
@@ -209,9 +205,9 @@
                     <div class="music-line"><div class="music-progress" id="progress"></div></div>
                     <span id="duration">0:00</span>
                     <div class="music-controls">
-                        <img id="prev" src="https://i.postimg.cc/c4zmgfJj/arriere.png">
-                        <img id="play-pause" src="https://i.postimg.cc/Gh1r0gG3/reprendre.png">
-                        <img id="next" src="https://i.postimg.cc/KYMsvJrJ/suivant.png">
+                        <img id="prev" src="images/arriere.png">
+                        <img id="play-pause" src="images/reprendre.png">
+                        <img id="next" src="images/suivant.png">
                     </div>
                 </div>
             </div>
@@ -224,8 +220,8 @@
 <script>
     const DISCORD_ID = '929651828747014164';
     const tracks = [
-        {src:"oc9/audios/9l3rkv.mp3",title:"Rain",cover:"https://i.postimg.cc/PJ5HGCmv/bleach.jpg"},
-        {src:"oc9/audios/4u4kam.mp3",title:"Nature",cover:"https://i.postimg.cc/Kj8bX1nK/ichigo.jpg"}
+        {src:"oc9/audios/9l3rkv.mp3",title:"Rain",cover:"oc9/images/bleach.jpg"},
+        {src:"oc9/audios/4u4kam.mp3",title:"Nature",cover:"oc9/images/ichigo.jpg"}
     ];
     let currentTrack = 0;
     const audio = document.getElementById("audio");
@@ -240,8 +236,8 @@
     loadTrack(0);
 
     playPauseBtn.onclick = () => {
-        if(audio.paused) { audio.play(); playPauseBtn.src="https://i.postimg.cc/Gh1r0gG3/reprendre.png"; }
-        else { audio.pause(); playPauseBtn.src="https://i.postimg.cc/RhVRfRKr/pause.png"; }
+        if(audio.paused) { audio.play(); playPauseBtn.src="images/reprendre.png"; }
+        else { audio.pause(); playPauseBtn.src="images/pause.png"; }
     };
 
     document.getElementById("next").onclick = () => { loadTrack(currentTrack + 1); audio.play(); };
