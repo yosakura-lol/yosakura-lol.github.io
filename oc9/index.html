@@ -42,16 +42,20 @@
         .overlay.fade-out { opacity: 0; pointer-events: none; }
         .overlay p { font-size: 1.8rem; color: white; font-weight: bold; user-select: none; }
 
-        .tilt-container { perspective: 1000px; z-index: 1; }
+        .tilt-container { perspective: 1000px; z-index: 1; width: 100%; display: flex; justify-content: center; }
         .tilt-group { 
             display: flex; flex-direction: column; align-items: center; gap: 12px;
             transition: transform 0.15s ease-out; transform-style: preserve-3d;
+            width: 100%;
         }
 
         .rectangle, .discord-card {
             background: var(--glass-bg); backdrop-filter: var(--blur);
             border-radius: 10px; box-shadow: var(--glass-shadow);
-            width: 705px; opacity: 0;
+            /* Modification ici pour le responsive */
+            width: 90%; 
+            max-width: 705px; 
+            opacity: 0;
         }
 
         .visible { animation: zoomIn 0.3s ease-out 0.1s forwards; }
@@ -134,14 +138,14 @@
             position: absolute; bottom: 2px; right: 2px; width: 18px; height: 18px;
             border-radius: 50%; border: 3px solid rgba(255,255,255,0.2); background: #747f8d;
         }
-        .info-container { flex: 1; margin-left: 20px; }
-        .discord-name { font-size: 18px; font-weight: bold; }
-        .discord-activity { font-size: 13px; color: #cfcfcf; margin-top: 4px; }
+        .info-container { flex: 1; margin-left: 20px; overflow: hidden; }
+        .discord-name { font-size: 18px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .discord-activity { font-size: 13px; color: #cfcfcf; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         #activity-icon { width: 60px; height: 60px; border-radius: 8px; opacity: 0; transition: 0.3s; }
 
         .rectangle.bottom { height: 100px; display: flex; align-items: center; padding: 15px; gap: 15px; }
         .music-cover { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
-        .music-info { flex: 1; display: flex; flex-direction: column; }
+        .music-info { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
         .music-title { font-size: 0.8rem; font-weight: bold; color: #fff; margin-bottom: 8px; }
         .music-time { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: #fff; }
         .music-line { flex: 1; height: 4px; background: rgba(255,255,255,0.3); border-radius: 3px; overflow: hidden; }
@@ -152,84 +156,81 @@
         @font-face { font-family: "NoFont"; src: url("oc9/fonts/fonts.ttf") format("truetype"); }
         
         ::selection {
-        background-color: white; 
-}
-::-moz-selection {
-    background-color: white;
-}
-
-        
+            background-color: white; 
+        }
+        ::-moz-selection {
+            background-color: white;
+        }
     </style>
 </head>
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
-    <source src="oc9/videos/perfect.mp4" type="video/mp4">
-</video>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="oc9/videos/perfect.mp4" type="video/mp4">
+    </video>
 
-<div class="overlay" id="overlay"><p>click | "best user"</p></div>
+    <div class="overlay" id="overlay"><p>click | "best user"</p></div>
 
-<div class="tilt-container" id="tilt">
-    <div class="tilt-group">
-        <div class="rectangle top">
-            <div class="location"><img src="oc9/images/location.png"><span>France</span></div>
-            <img class="avatar" src="oc9/images/avatar.jpg">
-            
-            <div class="username">
-                <span class="u-text">41</span>
-                <div class="badges" style="position: relative; top: 0; left: 20px;">
-                    <div class="badge" data-title="Owner"><img src="oc9/images/crown.png"></div>
-                    <div class="badge" data-title="Partnerr"><img src="oc9/images/partner.png"></div>
-                    <div class="badge" data-title="Modo"><img src="oc9/images/moderator.png"></div>
-                    
+    <div class="tilt-container" id="tilt">
+        <div class="tilt-group">
+            <div class="rectangle top">
+                <div class="location"><img src="oc9/images/location.png"><span>France</span></div>
+                <img class="avatar" src="oc9/images/avatar.jpg">
+                
+                <div class="username">
+                    <span class="u-text">41</span>
+                    <div class="badges" style="position: relative; top: 0; left: 20px;">
+                        <div class="badge" data-title="Owner"><img src="oc9/images/crown.png"></div>
+                        <div class="badge" data-title="Partnerr"><img src="oc9/images/partner.png"></div>
+                        <div class="badge" data-title="Modo"><img src="oc9/images/moderator.png"></div>
+                    </div>
+                </div>
+
+                <div class="subtitle" id="subtitle"></div>
+                <div class="joined"></div>
+                <div class="separator"></div>
+
+                <div class="custom-links">
+                    <a href="https://github.com/oc9uhq" target="_blank"><img src="oc9/images/github.png"></a>
+                    <a href="https://www.instagram.com/charliekirk1776/" target="_blank"><img src="oc9/images/instagram.png"></a>
+                    <a href="https://www.tiktok.com/@youbecameastrangers" target="_blank"><img src="oc9/images/tiktok.png"></a>
                 </div>
             </div>
 
-            <div class="subtitle" id="subtitle"></div>
-            <div class="joined"></div>
-            <div class="separator"></div>
-
-            <div class="custom-links">
-                <a href="https://github.com/oc9uhq" target="_blank"><img src="oc9/images/github.png"></a>
-                <a href="https://www.instagram.com/charliekirk1776/" target="_blank"><img src="oc9/images/instagram.png"></a>
-                <a href="https://www.tiktok.com/@youbecameastrangers" target="_blank"><img src="oc9/images/tiktok.png"></a>
+            <div class="discord-card" id="discord-card">
+                <div class="avatar-container">
+                    <img id="discord-pdp" class="discord-pdp" src="">
+                    <div id="status-dot" class="status-dot"></div>
+                </div>
+                <div class="info-container">
+                    <div id="discord-username" class="discord-name">Chargement...</div>
+                    <div id="discord-activity" class="discord-activity">Chargement...</div>
+                </div>
+                <img id="activity-icon" src="">
             </div>
-        </div>
 
-        <div class="discord-card" id="discord-card">
-            <div class="avatar-container">
-                <img id="discord-pdp" class="discord-pdp" src="">
-                <div id="status-dot" class="status-dot"></div>
-            </div>
-            <div class="info-container">
-                <div id="discord-username" class="discord-name">Chargement...</div>
-                <div id="discord-activity" class="discord-activity">Chargement...</div>
-            </div>
-            <img id="activity-icon" src="">
-        </div>
-
-        <div class="rectangle bottom">
-            <img class="music-cover" id="cover" src="">
-            <div class="music-info">
-                <div class="music-title" id="music-title">TOXIC</div>
-                <div class="music-time">
-                    <span id="current-time">0:00</span>
-                    <div class="music-line"><div class="music-progress" id="progress"></div></div>
-                    <span id="duration">0:00</span>
-                    <div class="music-controls">
-                        <img id="prev" src="images/arriere.png">
-                        <img id="play-pause" src="images/reprendre.png">
-                        <img id="next" src="images/suivant.png">
+            <div class="rectangle bottom">
+                <img class="music-cover" id="cover" src="">
+                <div class="music-info">
+                    <div class="music-title" id="music-title">TOXIC</div>
+                    <div class="music-time">
+                        <span id="current-time">0:00</span>
+                        <div class="music-line"><div class="music-progress" id="progress"></div></div>
+                        <span id="duration">0:00</span>
+                        <div class="music-controls">
+                            <img id="prev" src="images/arriere.png">
+                            <img id="play-pause" src="images/reprendre.png">
+                            <img id="next" src="images/suivant.png">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<audio id="audio"></audio>
+    <audio id="audio"></audio>
 
-<title>@oc9 | yoskr.lol</title>
+    <title>@oc9 | yoskr.lol</title>
     <meta name="description" content="owner of yskr">
     <meta property="og:title" content="@oc9 | yoskr.lol">
     <meta property="og:description" content="owner of yskr">
@@ -239,129 +240,129 @@
     <meta name="theme-color" content="#2b2d31">
     <meta name="twitter:card" content="summary_large_image">
 
-<script>
-    const DISCORD_ID = '929651828747014164';
-    const tracks = [
-        {src:"oc9/audios/9l3rkv.mp3",title:"Rain",cover:"oc9/images/bleach.jpg"},
-        {src:"oc9/audios/4u4kam.mp3",title:"Nature",cover:"oc9/images/ichigo.jpg"}
-    ];
-    let currentTrack = 0;
-    const audio = document.getElementById("audio");
-    const playPauseBtn = document.getElementById("play-pause");
+    <script>
+        const DISCORD_ID = '929651828747014164';
+        const tracks = [
+            {src:"oc9/audios/9l3rkv.mp3",title:"Rain",cover:"oc9/images/bleach.jpg"},
+            {src:"oc9/audios/4u4kam.mp3",title:"Nature",cover:"oc9/images/ichigo.jpg"}
+        ];
+        let currentTrack = 0;
+        const audio = document.getElementById("audio");
+        const playPauseBtn = document.getElementById("play-pause");
 
-    function loadTrack(index) {
-        currentTrack = (index + tracks.length) % tracks.length;
-        audio.src = tracks[currentTrack].src;
-        document.getElementById("cover").src = tracks[currentTrack].cover;
-        document.getElementById("music-title").textContent = tracks[currentTrack].title;
-        playPauseBtn.src = "images/reprendre.png";
-    }
-    loadTrack(0);
-
-    playPauseBtn.onclick = () => {
-        if(audio.paused) { audio.play(); playPauseBtn.src="images/reprendre.png"; }
-        else { audio.pause(); playPauseBtn.src="images/pause.png"; }
-    };
-
-    document.getElementById("next").onclick = () => { loadTrack(currentTrack + 1); audio.play(); };
-    document.getElementById("prev").onclick = () => { loadTrack(currentTrack - 1); audio.play(); };
-
-    audio.ontimeupdate = () => {
-        const pct = (audio.currentTime / audio.duration) * 100 || 0;
-        document.getElementById("progress").style.width = pct + "%";
-        const m = Math.floor(audio.currentTime/60), s = Math.floor(audio.currentTime%60);
-        document.getElementById("current-time").textContent = `${m}:${s.toString().padStart(2,'0')}`;
-    };
-
-    audio.onloadedmetadata = () => {
-        const m = Math.floor(audio.duration/60), s = Math.floor(audio.duration%60);
-        document.getElementById("duration").textContent = `${m}:${s.toString().padStart(2,'0')}`;
-    };
-
-    document.getElementById("overlay").onclick = function() {
-        this.classList.add("fade-out");
-        document.querySelectorAll(".rectangle, .discord-card").forEach(r => r.classList.add("visible"));
-        audio.play();
-    };
-
-    const tiltContainer = document.getElementById("tilt");
-    const tiltGroup = tiltContainer.querySelector(".tilt-group");
-    tiltContainer.onmousemove = (e) => {
-        const rect = tiltContainer.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        tiltGroup.style.transform = `rotateX(${(y - 0.5) * 20}deg) rotateY(${(x - 0.5) * -20}deg)`;
-    };
-    tiltContainer.onmouseleave = () => tiltGroup.style.transform = "rotateX(0) rotateY(0)";
-
-    const titleTxt = ["@","@o","@oc","@oc9","@oc","@o"];
-    let tIdx = 0;
-    setInterval(() => { document.title = titleTxt[tIdx]; tIdx = (tIdx + 1) % titleTxt.length; }, 400);
-
-    const subText = "Owner of yskr.lol";
-    let subIdx = 0, subDir = 1;
-    function typeWriter() {
-        document.getElementById("subtitle").textContent = subText.slice(0, subIdx);
-        subIdx += subDir;
-        if (subIdx > subText.length) { subDir = -1; subIdx = subText.length; setTimeout(typeWriter, 1000); }
-        else if (subIdx < 0) { subDir = 1; subIdx = 0; setTimeout(typeWriter, 500); }
-        else { setTimeout(typeWriter, subDir === 1 ? 120 : 80); }
-    }
-    typeWriter();
-
-    async function updateDiscord() {
-        try {
-            const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-            const { data: user, success } = await res.json();
-            if (!success) return;
-            document.getElementById('discord-pdp').src = `https://cdn.discordapp.com/avatars/${user.discord_user.id}/${user.discord_user.avatar}.png`;
-            document.getElementById('discord-username').textContent = user.discord_user.global_name || user.discord_user.username;
-            const colors = { online: '#43b581', idle: '#faa61a', dnd: '#f04747', offline: '#747f8d' };
-            document.getElementById('status-dot').style.backgroundColor = colors[user.discord_status];
-            const actEl = document.getElementById('discord-activity');
-            const imgEl = document.getElementById('activity-icon');
-            if (user.listening_to_spotify) {
-                actEl.textContent = `Listening to ${user.spotify.song}`;
-                imgEl.src = user.spotify.album_art_url; imgEl.style.opacity = 1;
-            } else if (user.activities.length) {
-                const act = user.activities.find(a => a.type !== 4) || user.activities[0];
-                actEl.textContent = `Playing ${act.name}`;
-                imgEl.style.opacity = act.assets ? 1 : 0;
-                if(act.assets) imgEl.src = act.assets.large_image.startsWith("mp:ext") ? act.assets.large_image.replace(/.*https\//, "https://") : `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.assets.large_image}.png`;
-            } else {
-                actEl.textContent = "No current activity"; imgEl.style.opacity = 0;
-            }
-        } catch (e) { console.error(e); }
-    }
-    setInterval(updateDiscord, 15000);
-    updateDiscord();
-
-    (function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        Object.assign(canvas.style, { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999 });
-        document.body.appendChild(canvas);
-        let pts = [], m = {x:0, y:0}, ok = false;
-        window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-        window.onresize();
-        document.onmousemove = e => { m.x = e.clientX; m.y = e.clientY; if(!ok) { for(let i=0; i<15; i++) pts.push({x:m.x, y:m.y, vx:0, vy:0}); ok = true; } };
-        function draw() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            if(ok) {
-                ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 3; ctx.beginPath();
-                pts.forEach((p, i) => {
-                    let t = i === 0 ? m : pts[i-1];
-                    p.vx = (p.vx + (t.x - p.x) * 0.1) * 0.7; p.vy = (p.vy + (t.y - p.y) * 0.1) * 0.7;
-                    p.x += p.vx; p.y += p.vy;
-                    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
-                });
-                ctx.stroke();
-            }
-            requestAnimationFrame(draw);
+        function loadTrack(index) {
+            currentTrack = (index + tracks.length) % tracks.length;
+            audio.src = tracks[currentTrack].src;
+            document.getElementById("cover").src = tracks[currentTrack].cover;
+            document.getElementById("music-title").textContent = tracks[currentTrack].title;
+            playPauseBtn.src = "images/reprendre.png";
         }
-        draw();
-    })();
-    document.oncontextmenu = e => e.preventDefault();
-</script>
+        loadTrack(0);
+
+        playPauseBtn.onclick = () => {
+            if(audio.paused) { audio.play(); playPauseBtn.src="images/reprendre.png"; }
+            else { audio.pause(); playPauseBtn.src="images/pause.png"; }
+        };
+
+        document.getElementById("next").onclick = () => { loadTrack(currentTrack + 1); audio.play(); };
+        document.getElementById("prev").onclick = () => { loadTrack(currentTrack - 1); audio.play(); };
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100 || 0;
+            document.getElementById("progress").style.width = pct + "%";
+            const m = Math.floor(audio.currentTime/60), s = Math.floor(audio.currentTime%60);
+            document.getElementById("current-time").textContent = `${m}:${s.toString().padStart(2,'0')}`;
+        };
+
+        audio.onloadedmetadata = () => {
+            const m = Math.floor(audio.duration/60), s = Math.floor(audio.duration%60);
+            document.getElementById("duration").textContent = `${m}:${s.toString().padStart(2,'0')}`;
+        };
+
+        document.getElementById("overlay").onclick = function() {
+            this.classList.add("fade-out");
+            document.querySelectorAll(".rectangle, .discord-card").forEach(r => r.classList.add("visible"));
+            audio.play();
+        };
+
+        const tiltContainer = document.getElementById("tilt");
+        const tiltGroup = tiltContainer.querySelector(".tilt-group");
+        tiltContainer.onmousemove = (e) => {
+            const rect = tiltContainer.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            tiltGroup.style.transform = `rotateX(${(y - 0.5) * 20}deg) rotateY(${(x - 0.5) * -20}deg)`;
+        };
+        tiltContainer.onmouseleave = () => tiltGroup.style.transform = "rotateX(0) rotateY(0)";
+
+        const titleTxt = ["@","@o","@oc","@oc9","@oc","@o"];
+        let tIdx = 0;
+        setInterval(() => { document.title = titleTxt[tIdx]; tIdx = (tIdx + 1) % titleTxt.length; }, 400);
+
+        const subText = "Owner of yskr.lol";
+        let subIdx = 0, subDir = 1;
+        function typeWriter() {
+            document.getElementById("subtitle").textContent = subText.slice(0, subIdx);
+            subIdx += subDir;
+            if (subIdx > subText.length) { subDir = -1; subIdx = subText.length; setTimeout(typeWriter, 1000); }
+            else if (subIdx < 0) { subDir = 1; subIdx = 0; setTimeout(typeWriter, 500); }
+            else { setTimeout(typeWriter, subDir === 1 ? 120 : 80); }
+        }
+        typeWriter();
+
+        async function updateDiscord() {
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const { data: user, success } = await res.json();
+                if (!success) return;
+                document.getElementById('discord-pdp').src = `https://cdn.discordapp.com/avatars/${user.discord_user.id}/${user.discord_user.avatar}.png`;
+                document.getElementById('discord-username').textContent = user.discord_user.global_name || user.discord_user.username;
+                const colors = { online: '#43b581', idle: '#faa61a', dnd: '#f04747', offline: '#747f8d' };
+                document.getElementById('status-dot').style.backgroundColor = colors[user.discord_status];
+                const actEl = document.getElementById('discord-activity');
+                const imgEl = document.getElementById('activity-icon');
+                if (user.listening_to_spotify) {
+                    actEl.textContent = `Listening to ${user.spotify.song}`;
+                    imgEl.src = user.spotify.album_art_url; imgEl.style.opacity = 1;
+                } else if (user.activities.length) {
+                    const act = user.activities.find(a => a.type !== 4) || user.activities[0];
+                    actEl.textContent = `Playing ${act.name}`;
+                    imgEl.style.opacity = act.assets ? 1 : 0;
+                    if(act.assets) imgEl.src = act.assets.large_image.startsWith("mp:ext") ? act.assets.large_image.replace(/.*https\//, "https://") : `https://cdn.discordapp.com/app-assets/${act.application_id}/${act.assets.large_image}.png`;
+                } else {
+                    actEl.textContent = "No current activity"; imgEl.style.opacity = 0;
+                }
+            } catch (e) { console.error(e); }
+        }
+        setInterval(updateDiscord, 15000);
+        updateDiscord();
+
+        (function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            Object.assign(canvas.style, { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999 });
+            document.body.appendChild(canvas);
+            let pts = [], m = {x:0, y:0}, ok = false;
+            window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+            window.onresize();
+            document.onmousemove = e => { m.x = e.clientX; m.y = e.clientY; if(!ok) { for(let i=0; i<15; i++) pts.push({x:m.x, y:m.y, vx:0, vy:0}); ok = true; } };
+            function draw() {
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+                if(ok) {
+                    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 3; ctx.beginPath();
+                    pts.forEach((p, i) => {
+                        let t = i === 0 ? m : pts[i-1];
+                        p.vx = (p.vx + (t.x - p.x) * 0.1) * 0.7; p.vy = (p.vy + (t.y - p.y) * 0.1) * 0.7;
+                        p.x += p.vx; p.y += p.vy;
+                        i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                    });
+                    ctx.stroke();
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+        document.oncontextmenu = e => e.preventDefault();
+    </script>
 </body>
 </html>
