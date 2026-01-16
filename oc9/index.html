@@ -64,8 +64,8 @@
         .rectangle.top { height: 265px; position: relative; }
 
         .avatar {
-            position: absolute; top: 0; left: 40px; margin-top: -40px;
-            width: 115px; border-radius: 25px; pointer-events: none;
+            position: absolute; top: 0; left: 25px; margin-top: -40px;
+            width: 115px; border-radius: 30px; pointer-events: none;
         }
 
         .username {
@@ -151,6 +151,21 @@
 
         @font-face { font-family: "NoFont"; src: url("oc9/fonts/fonts.ttf") format("truetype"); }
         
+        ::selection {
+        background-color: white; 
+}
+::-moz-selection {
+    background-color: white;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    pointer-events: none; 
+}
         
     </style>
 </head>
