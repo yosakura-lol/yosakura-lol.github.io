@@ -44,19 +44,26 @@
 
         .tilt-container { perspective: 1000px; z-index: 1; width: 100%; display: flex; justify-content: center; }
         .tilt-group { 
-            display: flex; flex-direction: column; align-items: center; gap: 12px;
-            transition: transform 0.15s ease-out; transform-style: preserve-3d;
-            width: 100%;
-        }   
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 12px;
+    transition: transform 0.15s ease-out; 
+    transform-style: preserve-3d;
+    /* On définit la largeur ici pour que le groupe serve de zone de détection */
+    width: 90%; 
+    max-width: 705px; 
+}
 
-        .rectangle, .discord-card {
-            background: var(--glass-bg); backdrop-filter: var(--blur);
-            border-radius: 10px; box-shadow: var(--glass-shadow);
-            /* Modification ici pour le responsive */
-            width: 90%; 
-            max-width: 705px; 
-            opacity: 0;
-        }
+.rectangle, .discord-card {
+    background: var(--glass-bg); 
+    backdrop-filter: var(--blur);
+    border-radius: 10px; 
+    box-shadow: var(--glass-shadow);
+    /* Les rectangles prennent maintenant toute la place disponible dans le groupe */
+    width: 100%; 
+    opacity: 0;
+}
 
         .visible { animation: zoomIn 0.3s ease-out 0.1s forwards; }
 
@@ -286,24 +293,19 @@
         };
 
         const tiltContainer = document.getElementById("tilt");
-const tiltGroup = tiltContainer.querySelector(".tilt-group");
+       // Remplace l'ancienne partie tilt par celle-ci
+const tiltGroup = document.querySelector(".tilt-group");
 
-tiltContainer.onmousemove = (e) => {
-    const isOverCard = e.target.closest('.rectangle') || e.target.closest('.discord-card');
-
-    if (isOverCard) {
-        const rect = isOverCard.getBoundingClientRect();
-        
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-
-        tiltGroup.style.transform = `rotateX(${(y - 0.5) * 15}deg) rotateY(${(x - 0.5) * -15}deg)`;
-    } else {
-        tiltGroup.style.transform = "rotateX(0) rotateY(0)";
-    }
+tiltGroup.onmousemove = (e) => {
+    const rect = tiltGroup.getBoundingClientRect();
+    // Le calcul se fait maintenant par rapport aux bords du rectangle
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    
+    tiltGroup.style.transform = `rotateX(${(y - 0.5) * 20}deg) rotateY(${(x - 0.5) * -20}deg)`;
 };
 
-tiltContainer.onmouseleave = () => {
+tiltGroup.onmouseleave = () => {
     tiltGroup.style.transform = "rotateX(0) rotateY(0)";
 };
         tiltContainer.onmouseleave = () => tiltGroup.style.transform = "rotateX(0) rotateY(0)";
