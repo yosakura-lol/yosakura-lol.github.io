@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.17);
+            --glass-bg: rgba(255, 255, 255, 0.459);
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             --blur: blur(10px);
         }
@@ -29,7 +29,7 @@
             position: fixed; inset: 0;
             width: 100vw; height: 100vh;
             object-fit: cover; z-index: -1;
-            filter: blur(0.5px) brightness(0.15);
+            filter: blur(4px) ;
             transform: scale(1.1); pointer-events: none;
         }
 
@@ -60,7 +60,6 @@
     backdrop-filter: var(--blur);
     border-radius: 10px; 
     box-shadow: var(--glass-shadow);
-    /* Les rectangles prennent maintenant toute la place disponible dans le groupe */
     width: 100%; 
     opacity: 0;
 }
