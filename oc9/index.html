@@ -351,31 +351,6 @@ tiltGroup.onmouseleave = () => {
         setInterval(updateDiscord, 15000);
         updateDiscord();
 
-        (function() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            Object.assign(canvas.style, { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9999 });
-            document.body.appendChild(canvas);
-            let pts = [], m = {x:0, y:0}, ok = false;
-            window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-            window.onresize();
-            document.onmousemove = e => { m.x = e.clientX; m.y = e.clientY; if(!ok) { for(let i=0; i<15; i++) pts.push({x:m.x, y:m.y, vx:0, vy:0}); ok = true; } };
-            function draw() {
-                ctx.clearRect(0,0,canvas.width, canvas.height);
-                if(ok) {
-                    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 3; ctx.beginPath();
-                    pts.forEach((p, i) => {
-                        let t = i === 0 ? m : pts[i-1];
-                        p.vx = (p.vx + (t.x - p.x) * 0.1) * 0.7; p.vy = (p.vy + (t.y - p.y) * 0.1) * 0.7;
-                        p.x += p.vx; p.y += p.vy;
-                        i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
-                    });
-                    ctx.stroke();
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-        })();
         document.oncontextmenu = e => e.preventDefault();
     </script>
 </body>
