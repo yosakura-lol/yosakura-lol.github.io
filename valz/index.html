@@ -181,16 +181,16 @@
             <div class="tilt-group">
                 <div class="rectangle top">
                     <div class="location"><img src="oc9/images/location.png"><span>France</span></div>
-                    <img class="avatar" src="https://i.postimg.cc/B6yr5PmX/avatar.png">
+                    <img class="avatar" src="valz/images/avatar.png">
                     
                     <div class="username">
                         <span class="u-text">10'</span>
                         <div class="badges" style="position: relative; top: 0; left: 20px;">
-                            <div class="badge" data-title="Friend"><img src="https://i.postimg.cc/NFCk2RDZ/friend-removebg-preview.png"></div>
-                            <div class="badge" data-title="uhq"><img src="https://i.postimg.cc/Bb7BP2NW/uhq-removebg-preview.png"></div>
-                            <div class="badge" data-title="."><img src="https://i.postimg.cc/0Q42FQyf/C-removebg-preview-(1).png"></div>
-                            <div class="badge" data-title="."><img src="https://i.postimg.cc/hGk7QpVy/plus-removebg-preview.png"></div>
-                            <div class="badge" data-title="."><img src="https://i.postimg.cc/sxwXmcGH/V-removebg-preview.png"></div>
+                            <div class="badge" data-title="Friend"><img src="valz/images/friend.png"></div>
+                            <div class="badge" data-title="uhq"><img src="valz/images/uhq"></div>
+                            <div class="badge" data-title="."><img src="valz/images/C"></div>
+                            <div class="badge" data-title="."><img src="valz/images/plus"></div>
+                            <div class="badge" data-title="."><img src="valz/images/V"></div>
                         </div>
                     </div>
 
@@ -199,8 +199,8 @@
                     <div class="separator"></div>
 
                     <div class="custom-links">
-                        <a href="https://www.instagram.com/val.clln/" target="_blank"><img src="https://i.postimg.cc/905mBkf8/instagram.png"></a>
-                        <a href="https://www.tiktok.com/@val.clln" target="_blank"><img src="https://i.postimg.cc/3N58Zqwn/tiktok.png"></a>
+                        <a href="https://www.instagram.com/val.clln/" target="_blank"><img src="valz/images/instagram.png"></a>
+                        <a href="https://www.tiktok.com/@val.clln" target="_blank"><img src="valz/images/tiktok.png"></a>
                     </div>
                 </div>
 
@@ -249,8 +249,8 @@
         <script>
             const DISCORD_ID = '1122206434894024704';
             const tracks = [
-                {src:"https://files.catbox.moe/clq4lf.mp3",title:"Let",cover:"https://i.postimg.cc/zvzgj3vp/music.jpg"},
-                {src:"https://files.catbox.moe/u2shfn.mp3",title:"Blues",cover:"https://i.postimg.cc/MH6QDXH3/L.jpg"}
+                {src:"https://files.catbox.moe/clq4lf.mp3",title:"Let",cover:"valz/images/music.jpg"},
+                {src:"https://files.catbox.moe/u2shfn.mp3",title:"Blues",cover:"valz/images/L.jpg"}
             ];
             let currentTrack = 0;
             const audio = document.getElementById("audio");
@@ -272,6 +272,10 @@
 
             document.getElementById("next").onclick = () => { loadTrack(currentTrack + 1); audio.play(); };
             document.getElementById("prev").onclick = () => { loadTrack(currentTrack - 1); audio.play(); };
+            audio.onended = () => { 
+    loadTrack(currentTrack + 1); 
+    audio.play(); 
+};
 
             audio.ontimeupdate = () => {
                 const pct = (audio.currentTime / audio.duration) * 100 || 0;
