@@ -74,9 +74,19 @@
         .rectangle.top { height: 265px; position: relative; }
 
         .avatar {
-            position: absolute; top: 0; left: 25px; margin-top: -40px;
-            width: 120px; border-radius: 30px; pointer-events: none;
-        }
+    position: absolute; 
+    top: 0; 
+    left: 25px; 
+    margin-top: -40px;
+    width: 120px; 
+    
+    /* AJOUTS ICI */
+    aspect-ratio: 1 / 1;    /* Force le format carré */
+    object-fit: cover;      /* Recadre l'image pour remplir le carré sans la déformer */
+    
+    border-radius: 30px; 
+    pointer-events: none;
+}
 
         .username {
             position: absolute; top: 100px; left: 20px;
