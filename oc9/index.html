@@ -133,7 +133,7 @@
             display: flex; gap: 20px; width: 90%; justify-content: center;
         }
         .custom-links img { 
-            width: 55px; filter: brightness(0) invert(1) drop-shadow(0 0 5px #fff); transition: 0.3s;
+            width: 45px; filter: brightness(0) invert(1) drop-shadow(0 0 5px #fff); transition: 0.3s;
         }
         .custom-links a:hover img { transform: scale(1.1); }
 
@@ -184,10 +184,10 @@
                 <img class="avatar" src="oc9/images/avatar.jpg">
                 
                 <div class="username">
-                    <span class="u-text">41</span>
+                    <span class="u-text"></span>
                     <div class="badges" style="position: relative; top: 0; left: 20px;">
                         <div class="badge" data-title="Owner"><img src="oc9/images/crown.png"></div>
-                        <div class="badge" data-title="Partnerr"><img src="oc9/images/partner.png"></div>
+                        <div class="badge" data-title="Partner"><img src="oc9/images/partner.png"></div>
                         <div class="badge" data-title="Modo"><img src="oc9/images/moderator.png"></div>
                     </div>
                 </div>
@@ -272,6 +272,10 @@
 
         document.getElementById("next").onclick = () => { loadTrack(currentTrack + 1); audio.play(); };
         document.getElementById("prev").onclick = () => { loadTrack(currentTrack - 1); audio.play(); };
+        audio.onended = () => { 
+    loadTrack(currentTrack + 1); 
+    audio.play(); 
+};
 
         audio.ontimeupdate = () => {
             const pct = (audio.currentTime / audio.duration) * 100 || 0;
