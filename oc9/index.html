@@ -103,6 +103,8 @@
         .badge { position: relative; display: inline-block; }
         .badge img {
             width: 20px; height: 20px;
+            position: relative;
+            top: 2px;
             filter: brightness(0) invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.4)) drop-shadow(0 0 8px rgba(255,255,255,0.25)) drop-shadow(0 0 12px rgba(255,255,255,0.15));
         }
         .badge::after {
@@ -114,7 +116,7 @@
         .badge:hover::after { opacity: 1; transform: translateX(-50%) translateY(-2px); }
 
         .subtitle {
-            position: absolute; top: 140px; margin-left: 20px;
+            position: absolute; top: 146px; margin-left: 20px;
             font-size: 0.8rem; font-weight: bold; color: #ffffff; cursor: default;
         }
 
@@ -185,7 +187,7 @@
                 
                 <div class="username">
                     <span class="u-text">/oc9</span>
-                    <div class="badges" style="position: relative; top: 0; left: 20px;">
+                    <div class="badges" style="position: relative; top: -3px; left: 20px;">
                         <div class="badge" data-title="Owner"><img src="oc9/images/crown.png"></div>
                         <div class="badge" data-title="Partner"><img src="oc9/images/partner.png"></div>
                         <div class="badge" data-title="Bug Hunter"><img src="oc9/images/bug.png"></div>
