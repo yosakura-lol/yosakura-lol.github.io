@@ -186,11 +186,10 @@
                     <div class="username">
                         <span class="u-text">10'</span>
                         <div class="badges" style="position: relative; top: 0; left: 20px;">
-                            <div class="badge" data-title="Friend"><img src="valz/images/friend.png"></div>
+                            <div class="badge" data-title="friend"><img src="valz/images/friend.png"></div>
                             <div class="badge" data-title="uhq"><img src="valz/images/uhq.png"></div>
                             <div class="badge" data-title="."><img src="valz/images/C.png"></div>
-                            <div class="badge" data-title="."><img src="valz/images/plus.png"></div>
-                            <div class="badge" data-title="."><img src="valz/images/V.png"></div>
+                            <div class="badge" data-title="star"><img src="valz/images/star.png"></div>
                         </div>
                     </div>
 
@@ -317,7 +316,7 @@
             let tIdx = 0;
             setInterval(() => { document.title = titleTxt[tIdx]; tIdx = (tIdx + 1) % titleTxt.length; }, 400);
 
-            const subText = "UHQ wouf wouf";
+            const subText = "uhq originel";
             let subIdx = 0, subDir = 1;
             function typeWriter() {
                 document.getElementById("subtitle").textContent = subText.slice(0, subIdx);
