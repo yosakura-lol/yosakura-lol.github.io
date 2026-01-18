@@ -159,7 +159,7 @@
             .music-controls { display: flex; gap: 12px; }
             .music-controls img { width: 28px; filter: brightness(0) invert(1); cursor: pointer; }
 
-            @font-face { font-family: "NoFont"; src: url("https://files.catbox.moe/rqxsi5.otf") format("truetype"); }
+            @font-face { font-family: "NoFont"; src: url("valz/fonts/fonts1.otf") format("truetype"); }
             
             ::selection {
                 background-color: white; 
@@ -172,7 +172,7 @@
     <body>
 
         <video autoplay muted loop playsinline id="bg-video">
-            <source src="https://files.catbox.moe/4lke2c.mp4" type="video/mp4">
+            <source src="valz/videos/bg.mp4" type="video/mp4">
         </video>
 
         <div class="overlay" id="overlay"><p>click</p></div>
@@ -249,8 +249,8 @@
         <script>
             const DISCORD_ID = '1122206434894024704';
             const tracks = [
-                {src:"https://files.catbox.moe/clq4lf.mp3",title:"Let",cover:"valz/images/music.jpg"},
-                {src:"https://files.catbox.moe/u2shfn.mp3",title:"Blues",cover:"valz/images/L.jpg"}
+                {src:"valz/sounds/let.mp3",title:"Let",cover:"valz/images/music.jpg"},
+                {src:"valz/sounds/Blues.mp3",title:"Blues",cover:"valz/images/L.jpg"}
             ];
             let currentTrack = 0;
             const audio = document.getElementById("audio");
